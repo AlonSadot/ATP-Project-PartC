@@ -2,6 +2,8 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../OneDrive/Desktop/javafx-sdk-12/javafx-sdk-11.0.2/lib" />
+      <root url="file://$PROJECT_DIR$/../../../JavaFX/javafx-sdk-16/lib" />
+      <root url="file://$PROJECT_DIR$/../../../JavaFX/javafx-sdk-16/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -13,8 +15,14 @@
       <root url="file://$PROJECT_DIR$/../OneDrive/Desktop/javafx-sdk-12/javafx-sdk-11.0.2/lib/javafx.swing" />
       <root url="file://$PROJECT_DIR$/../OneDrive/Desktop/javafx-sdk-12/javafx-sdk-11.0.2/lib/javafx.web" />
       <root url="file://$PROJECT_DIR$/../OneDrive/Desktop/javafx-sdk-12/javafx-sdk-11.0.2/lib" />
+      <root url="file://$PROJECT_DIR$/../../../JavaFX/javafx-sdk-16/lib" />
+      <root url="file://$PROJECT_DIR$/../../../JavaFX/javafx-sdk-16/lib" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/../OneDrive/Desktop/javafx-sdk-12/javafx-sdk-11.0.2/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../JavaFX/javafx-sdk-16/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../JavaFX/javafx-sdk-16/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../OneDrive/Desktop/javafx-sdk-12/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../JavaFX/javafx-sdk-16/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../JavaFX/javafx-sdk-16/lib" recursive="false" type="SOURCES" />
   </library>
 </component>
