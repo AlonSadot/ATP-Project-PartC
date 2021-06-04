@@ -3,6 +3,7 @@ package ViewModel;
 import Model.IModel;
 import Model.MovementDirection;
 import algorithms.mazeGenerators.Maze;
+import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyEvent;
 
@@ -23,6 +24,7 @@ public class MyViewModel extends Observable implements Observer {
         setChanged();
         notifyObservers(arg);
     }
+
 
     public void generateMaze(int rows, int cols){
         model.generateMaze(rows,cols);
@@ -56,9 +58,7 @@ public class MyViewModel extends Observable implements Observer {
         return model.getPlayerRow();
     }
 
-    public int getPlayerCol(){
-        return model.getPlayerCol();
-    }
+    public int getPlayerCol(){ return model.getPlayerCol(); }
 
 }
 

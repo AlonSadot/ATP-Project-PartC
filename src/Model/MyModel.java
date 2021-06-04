@@ -46,7 +46,16 @@ public class MyModel extends Observable implements IModel{
         } catch (UnknownHostException e) { e.printStackTrace();
         }
         //we will call the server to generate the maze. we're using a client which asks to generate a maze
-        notifyMovement();
+        setChanged();
+        notifyObservers("maze generated");
+        movePlayer(playerRow,playerCol);
+    }
+
+    private void movePlayer(int playerRow, int playerCol) {
+        this.playerRow = playerRow;
+        this.playerCol = playerCol;
+        setChanged();
+        notifyObservers("player moved");
     }
 
     @Override

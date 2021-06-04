@@ -1,5 +1,6 @@
 package View;
 
+import Model.IModel;
 import Server.*;
 import algorithms.mazeGenerators.AMazeGenerator;
 import algorithms.mazeGenerators.MyMazeGenerator;
@@ -15,17 +16,27 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.fxml.FXMLLoader;
 import javafx.animation.*;
-
+import Model.*;
+import View.*;
+import ViewModel.*;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-        Scene scene = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
+        fxmlLoader.load();
         //Scene scene = new Scene(root);
+        IModel model = new MyModel();
+        MyViewModel viewModel = new MyViewModel(model);
+        MyViewController viewController = fxmlLoader.getController();
+        viewController.setMyViewModel(viewModel);
+        Scene scene = FXMLLoader.load(getClass().getResource("MyView.fxml"));
         primaryStage.setScene(scene);
         primaryStage.show();
+
+
+
 //        primaryStage.setTitle("Hello World");
 //        primaryStage.setScene(new Scene(stage, 1000, 700));
 //        primaryStage.show();
