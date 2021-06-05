@@ -81,28 +81,22 @@ public class MyViewController implements IView, Initializable, Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeWindow.fxml"));
         fxmlLoader.load();
 
-
-
         Parent root2 = FXMLLoader.load(getClass().getResource("MazeWindow.fxml"));
         Start_button.getScene().setRoot(root2);
-        IModel model = new MyModel();
-        MyViewModel viewModel = new MyViewModel(model);
-        MazeWindowController mazeWindowController = fxmlLoader.getController();
-        mazeWindowController.setMazeViewModel(viewModel);
 
 //        Scene root = FXMLLoader.load(getClass().getResource("MazeWindow.fxml"));
 
         //scene1 = new Scene(root);
-        int rows = Integer.valueOf(textField_mazeRows.getText());
-        int cols = Integer.valueOf(textField_mazeColumns.getText());
+//        int rows = Integer.valueOf(textField_mazeRows.getText());
+//        int cols = Integer.valueOf(textField_mazeColumns.getText());
 
-        mazeWindowController.myViewModel.generateMaze(rows, cols);
+//        mazeWindowController.myViewModel.generateMaze(rows, cols);
 //        currStage.setScene(root);
 //        currStage.show();
 
 
-        mazeWindowController.mazeRows = rows;
-        mazeWindowController.mazeCols = cols;
+//        mazeWindowController.mazeRows = rows;
+//        mazeWindowController.mazeCols = cols;
     }
 
 //    private void mazeGenerated() {

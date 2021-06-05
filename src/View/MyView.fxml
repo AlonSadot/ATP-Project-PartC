@@ -10,9 +10,6 @@
     <AnchorPane prefHeight="522.0" prefWidth="569.0">
       <children>
          <Button fx:id="Start_button" layoutX="116.0" layoutY="162.0" mnemonicParsing="false" onAction="#buttonStart" prefHeight="124.0" prefWidth="323.0" text="Start" />
-         <TextField fx:id = "textField_mazeRows" text="50" layoutX="135.0" layoutY="46.0" />
-         <TextField fx:id = "textField_mazeColumns" text="50" layoutX="135.0" layoutY="79.0" />
-         <Text layoutX="47.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rows" />
-         <Text layoutX="47.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Columns" />
+
       </children></AnchorPane>
 </Scene>

@@ -107,11 +107,11 @@ public class MazeDisplay extends Canvas {
         graphicsContext.setFill(Color.GREEN);
 
         Image playerImage = null;
-        try {
-            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no player image file");
-        }
+//        try {
+//            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
+//        } catch (FileNotFoundException e) {
+//            System.out.println("There is no player image file");
+//        }
         if(playerImage == null)
             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
         else
