@@ -27,14 +27,21 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         fxmlLoader.load();
         //Scene scene = new Scene(root);
+
         IModel model = new MyModel();
         MyViewModel viewModel = new MyViewModel(model);
         MyViewController viewController = fxmlLoader.getController();
+
         viewController.setMyViewModel(viewModel);
         Scene scene = FXMLLoader.load(getClass().getResource("MyView.fxml"));
         primaryStage.setScene(scene);
         primaryStage.show();
 
+
+//        IModel modelMaze = new MyModel();
+//        MyViewModel viewModelMaze = new MyViewModel(modelMaze);
+//        MazeWindowController mazeWindowController = fxmlLoader.getController();
+//        mazeWindowController.setMazeViewModel(viewModelMaze);
 
 
 //        primaryStage.setTitle("Hello World");

@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,9 +27,9 @@ import java.util.ResourceBundle;
 public class MazeWindowController implements Initializable, Observer {
     private Stage currStage;
     public MyViewModel myViewModel;
-    public TextField textField_mazeRows;
-    public TextField textField_mazeColumns;
-    public MazeDisplay mazeDisplay;
+    public MazeDisplay mazeDisplay = new MazeDisplay();
+    public int mazeRows;
+    public int mazeCols;
     public Label playerRow;
     public Label playerCol;
 
@@ -45,15 +46,19 @@ public class MazeWindowController implements Initializable, Observer {
         this.myViewModel.addObserver(this);
     }
 
+    StringProperty updatePlayerRow = new SimpleStringProperty();
+    StringProperty updatePlayerCol = new SimpleStringProperty();
+
     public void mouseClicked(MouseEvent mouseEvent) {
         mazeDisplay.requestFocus();
     }
 
     public void generateMaze(ActionEvent actionEvent) {
-        int rows = Integer.valueOf(textField_mazeRows.getText());
-        int cols = Integer.valueOf(textField_mazeColumns.getText());
+//        int rows = Integer.valueOf(textField_mazeRows.getText());
+//        int cols = Integer.valueOf(textField_mazeColumns.getText());
 
-        myViewModel.generateMaze(rows, cols);
+        this.myViewModel.generateMaze(mazeRows, mazeCols);
+
     }
 
     public void solveMaze(ActionEvent actionEvent) {
@@ -68,6 +73,11 @@ public class MazeWindowController implements Initializable, Observer {
         keyEvent.consume();
     }
 
+    public void setPlayerPosition(int row, int col){
+        mazeDisplay.setPlayerPosition(row, col);
+        setUpdatePlayerRow(row);
+        setUpdatePlayerCol(col);
+    }
 
 //    public void openFile(ActionEvent actionEvent) {
 //        FileChooser fc = new FileChooser();
@@ -89,6 +99,7 @@ public class MazeWindowController implements Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
         String change = (String) arg;
+
         switch (change) {
             case "maze generated" -> mazeGenerated();
             case "player moved" -> playerMoved();
@@ -99,19 +110,16 @@ public class MazeWindowController implements Initializable, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //playerRow.textProperty().bind(updatePlayerRow);
-        //playerCol.textProperty().bind(updatePlayerCol);
+//        playerRow.textProperty().bind(updatePlayerRow);
+//        playerCol.textProperty().bind(updatePlayerCol);
     }
-
-    StringProperty updatePlayerRow = new SimpleStringProperty();
-    StringProperty updatePlayerCol = new SimpleStringProperty();
 
     private void mazeSolved() {
         mazeDisplay.setSolution(myViewModel.getSolution());
     }
 
     private void playerMoved() {
-        mazeDisplay.setPlayerPosition(myViewModel.getPlayerRow(), myViewModel.getPlayerCol());
+        setPlayerPosition(myViewModel.getPlayerRow(), myViewModel.getPlayerCol());
     }
 
     private void mazeGenerated() {

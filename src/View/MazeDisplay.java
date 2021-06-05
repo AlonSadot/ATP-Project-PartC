@@ -20,6 +20,7 @@ public class MazeDisplay extends Canvas {
     private Solution solution;
     private int playerRow = 0;
     private int playerCol = 0;
+
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
 
@@ -121,13 +122,12 @@ public class MazeDisplay extends Canvas {
         int[][] mazeBody = maze.getMatrix();
 
         graphicsContext.setFill(Color.RED);
-
         javafx.scene.image.Image wallImage = null;
-        try{
-            wallImage = new Image(new FileInputStream(getImageFileNameWall()));
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no wall image file");
-        }
+//        try{
+//            wallImage = new Image(new FileInputStream(getImageFileNameWall()));
+//        } catch (FileNotFoundException e) {
+//            System.out.println("There is no wall image file");
+//        }
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -135,8 +135,9 @@ public class MazeDisplay extends Canvas {
                     //if it is a wall:
                     double x = j * cellWidth;
                     double y = i * cellHeight;
-                    if(wallImage == null)
+                    if(wallImage == null) {
                         graphicsContext.fillRect(x, y, cellWidth, cellHeight);
+                    }
                     else
                         graphicsContext.drawImage(wallImage, x, y, cellWidth, cellHeight);
                 }

@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import View.*?>
 
-<Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeWindowController">
-    <AnchorPane prefHeight="483.0" prefWidth="523.0">
-      <children>
-         <Button onAction="#buttonTrying" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" text="Trying" />
-          <Pane layoutX="158.0" layoutY="82.0" prefHeight="319.0" prefWidth="313.0" BorderPane.alignment="CENTER">
-              <children>
-<!--                  <View.MazeDisplay fx:id="mazeDisplayer" height="400.0" onKeyPressed="#keyPressed" width="400.0" />-->
-              </children>
-              <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-              </padding>
-          </Pane>
-      </children>
-    </AnchorPane>
-</Scene>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeWindowController">
+   <top>
+      <Button fx:id="tryingButton" mnemonicParsing="false" onAction="#buttonTrying" prefHeight="64.0" prefWidth="104.0" text="Trying" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Pane prefHeight="382.0" prefWidth="544.0" BorderPane.alignment="CENTER">
+         <children>
+            <MazeDisplay fx:id="mazeDisplayer" height="382.0" imageFileNamePlayer="./resources/images/mario.jpg" imageFileNameWall="./resources/images/wall.png" onKeyPressed="#keyPressed" width="544.0" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

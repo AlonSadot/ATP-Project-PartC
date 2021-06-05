@@ -108,7 +108,7 @@ public class MyModel extends Observable implements IModel{
 
     @Override
     public void assignObserver(Observer o) {
-
+        this.addObserver(o);
     }
 
     @Override
