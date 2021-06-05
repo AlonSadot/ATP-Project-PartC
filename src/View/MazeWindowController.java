@@ -65,16 +65,25 @@ public class MazeWindowController implements Initializable, Observer {
     }
 
     public void generateMaze(ActionEvent actionEvent) throws IOException {
-//        int rows = Integer.valueOf(textField_mazeRows.getText());
+
+
+
+
+        this.myViewModel.generateMaze(10, 10);
+        //        int rows = Integer.valueOf(textField_mazeRows.getText());
 //        int cols = Integer.valueOf(textField_mazeColumns.getText());
-        main_pane.setPadding(new Insets(100,100,100,100));
-        if (main_pane == null)
-            System.out.println("pane is null");
-        Image image1 = new Image("file:/D:/LocalTemps/Avatar6.jpg");
-        ImageView imageView1 = new ImageView(image1);
-        imageView1.setFitHeight(250);
-        imageView1.setFitWidth(250);
-        main_pane.getChildren().add(imageView1);
+//        main_pane.setPadding(new Insets(100,100,100,100));
+//        if (main_pane == null)
+//            System.out.println("pane is null");
+//        Image image1 = new Image("file:/D:/LocalTemps/Avatar6.jpg");
+//        ImageView imageView1 = new ImageView(image1);
+//        imageView1.setFitHeight(250);
+//        imageView1.setFitWidth(250);
+//        imageView1.setX(100);
+//        imageView1.setY(200);
+//        main_pane.getChildren().add(imageView1);
+
+
 
 
 
@@ -143,9 +152,14 @@ public class MazeWindowController implements Initializable, Observer {
         }
     }
 
+    public MazeWindowController() throws IOException{
+        IModel model = new MyModel();
+        myViewModel = new MyViewModel(model);
+        setMazeViewModel(myViewModel);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
 
 //        int rows = Integer.valueOf(textField_mazeRows.getText());
 //        int cols = Integer.valueOf(textField_mazeColumns.getText());

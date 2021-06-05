@@ -30,6 +30,7 @@ public class MazeDisplay extends Canvas {
     public void setPlayerPosition(int row, int col) {
         this.playerRow = row;
         this.playerCol = col;
+        draw();
     }
 
     public void setSolution(Solution solution){
@@ -107,11 +108,11 @@ public class MazeDisplay extends Canvas {
         graphicsContext.setFill(Color.GREEN);
 
         Image playerImage = null;
-//        try {
-//            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
-//        } catch (FileNotFoundException e) {
-//            System.out.println("There is no player image file");
-//        }
+        try {
+            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
+        } catch (FileNotFoundException e) {
+            System.out.println("There is no player image file");
+        }
         if(playerImage == null)
             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
         else
@@ -123,11 +124,11 @@ public class MazeDisplay extends Canvas {
 
         graphicsContext.setFill(Color.RED);
         javafx.scene.image.Image wallImage = null;
-//        try{
-//            wallImage = new Image(new FileInputStream(getImageFileNameWall()));
-//        } catch (FileNotFoundException e) {
-//            System.out.println("There is no wall image file");
-//        }
+        try{
+            wallImage = new Image(new FileInputStream(getImageFileNameWall()));
+        } catch (FileNotFoundException e) {
+            System.out.println("There is no wall image file");
+        }
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {

@@ -51,12 +51,7 @@ public class MyModel extends Observable implements IModel{
         movePlayer(playerRow,playerCol);
     }
 
-    private void movePlayer(int playerRow, int playerCol) {
-        this.playerRow = playerRow;
-        this.playerCol = playerCol;
-        setChanged();
-        notifyObservers("player moved");
-    }
+
 
     @Override
     public Maze getMaze() {
@@ -118,25 +113,30 @@ public class MyModel extends Observable implements IModel{
 
         switch (direction){
             case UP -> {
-                if (playerRow >0)
-                    playerRow--;
+                if (playerRow > 0)
+                    movePlayer(playerRow - 1, playerCol);
             }
             case DOWN -> {
-                if (playerRow < mazeBody.length-1)
-                    playerRow++;
+                if (playerRow < mazeBody.length - 1)
+                    movePlayer(playerRow + 1, playerCol);
             }
             case LEFT -> {
-                if (playerCol>0)
-                    playerCol--;
+                if (playerCol > 0)
+                    movePlayer(playerRow, playerCol - 1);
             }
             case RIGHT -> {
-                if (playerCol>mazeBody[0].length-1)
-                    playerCol++;
+                if (playerCol < mazeBody[0].length - 1)
+                    movePlayer(playerRow, playerCol + 1);
             }
         }
-        notifyMovement();
     }
 
+    private void movePlayer(int playerRow, int playerCol) {
+        this.playerRow = playerRow;
+        this.playerCol = playerCol;
+        setChanged();
+        notifyObservers("player moved");
+    }
 
 
     private void notifyMovement() {
