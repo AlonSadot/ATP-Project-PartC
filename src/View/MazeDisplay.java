@@ -3,6 +3,8 @@ package View;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.GraphicsContext;
@@ -20,14 +22,64 @@ public class MazeDisplay extends Canvas {
     private Solution solution;
     private int playerRow = 0;
     private int playerCol = 0;
+    String picturePath = "file:./resources/images/DragonDown.png";
 
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
 
+    @Override
+    public boolean isResizable(){
+        return true;
+    }
 
+    @Override
+    public double minHeight(double width)
+    {
+        return 350;
+    }
 
+    @Override
+    public double maxHeight(double width)
+    {
+        return 1000;
+    }
+
+    @Override
+    public double prefHeight(double width)
+    {
+        return minHeight(width);
+    }
+
+    @Override
+    public double minWidth(double height)
+    {
+        return 0;
+    }
+
+    @Override
+    public double maxWidth(double height)
+    {
+        return 10000;
+    }
+
+    @Override
+    public void resize(double width, double height)
+    {
+        super.setWidth(width);
+        super.setHeight(height);
+        draw();
+    }
 
     public void setPlayerPosition(int row, int col) {
+        if (row > playerRow)
+            picturePath = "file:./resources/images/DragonDown.png";
+        else if (row < playerRow)
+            picturePath = "file:./resources/images/DragonUp.png";
+        else if (col >playerCol)
+            picturePath = "file:./resources/images/DragonRight.png";
+        else
+            picturePath = "file:./resources/images/DragonLeft.png";
+
         this.playerRow = row;
         this.playerCol = col;
         draw();
@@ -80,7 +132,10 @@ public class MazeDisplay extends Canvas {
         System.out.println("drawing solution...");
     }
 
-    private void draw() {
+    public void draw() {
+        /*
+        Might need to change back to private
+         */
         if(maze != null){
             int[][] mazeBody = maze.getMatrix();
             double canvasHeight = getHeight();
@@ -105,19 +160,14 @@ public class MazeDisplay extends Canvas {
     private void drawPlayer(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
         double x = getPlayerCol() * cellWidth;
         double y = getPlayerRow() * cellHeight;
-        graphicsContext.setFill(Color.GREEN);
 
-        Image playerImage = null;
-        try {
-            playerImage = new Image(new FileInputStream(getImageFileNamePlayer()));
-        } catch (FileNotFoundException e) {
-            System.out.println("There is no player image file");
-        }
+        Image playerImage =  new Image(picturePath);
         if(playerImage == null)
             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
-        else
+        else{
             graphicsContext.drawImage(playerImage, x, y, cellWidth, cellHeight);
-    }
+            }
+        }
 
     private void drawMazeWalls(GraphicsContext graphicsContext, double cellHeight, double cellWidth, int rows, int cols) {
         int[][] mazeBody = maze.getMatrix();

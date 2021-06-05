@@ -51,7 +51,7 @@ public class MyViewModel extends Observable implements Observer {
             case RIGHT -> direction = MovementDirection.RIGHT;
             default -> {return;}
         }
-        model.updatePlayerLocation(direction);
+    model.updatePlayerLocation(direction);
     }
 
     public int getPlayerRow(){

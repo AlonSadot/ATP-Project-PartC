@@ -3,6 +3,7 @@ package View;
 import Model.IModel;
 import Model.MyModel;
 import ViewModel.MyViewModel;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -43,6 +45,7 @@ public class MazeWindowController implements Initializable, Observer {
 
     @FXML
     public Pane main_pane;
+    public AnchorPane mazeAnchor;
 
     public void buttonTrying(ActionEvent event) throws IOException {
         Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
@@ -59,6 +62,7 @@ public class MazeWindowController implements Initializable, Observer {
 
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
+
 
     public void mouseClicked(MouseEvent mouseEvent) {
         mazeDisplay.requestFocus();
@@ -82,8 +86,8 @@ public class MazeWindowController implements Initializable, Observer {
 //        imageView1.setX(100);
 //        imageView1.setY(200);
 //        main_pane.getChildren().add(imageView1);
-
-
+//        mazeDisplay.scaleXProperty().bind(mazeDisplay.getScene().widthProperty().multiply(0.5));
+//        mazeDisplay.scaleYProperty().bind(mazeDisplay.getScene().heightProperty().multiply(0.5));
 
 
 
@@ -156,6 +160,16 @@ public class MazeWindowController implements Initializable, Observer {
         IModel model = new MyModel();
         myViewModel = new MyViewModel(model);
         setMazeViewModel(myViewModel);
+
+        InvalidationListener listener = new InvalidationListener(){
+            @Override
+            public void invalidated(javafx.beans.Observable o) {
+                mazeDisplay.draw();
+            }
+        };
+        mazeDisplay.widthProperty().addListener(listener);
+        mazeDisplay.heightProperty().addListener(listener);
+
     }
 
     @Override

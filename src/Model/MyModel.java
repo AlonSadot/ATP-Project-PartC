@@ -113,19 +113,19 @@ public class MyModel extends Observable implements IModel{
 
         switch (direction){
             case UP -> {
-                if (playerRow > 0)
+                if (playerRow > 0 && (mazeBody[playerRow - 1][playerCol]  == 0))
                     movePlayer(playerRow - 1, playerCol);
             }
             case DOWN -> {
-                if (playerRow < mazeBody.length - 1)
+                if (playerRow < mazeBody.length - 1 && (mazeBody[playerRow + 1][playerCol]  == 0) )
                     movePlayer(playerRow + 1, playerCol);
             }
             case LEFT -> {
-                if (playerCol > 0)
+                if (playerCol > 0 && (mazeBody[playerRow ][playerCol- 1]  == 0))
                     movePlayer(playerRow, playerCol - 1);
             }
             case RIGHT -> {
-                if (playerCol < mazeBody[0].length - 1)
+                if (playerCol < mazeBody[0].length - 1 && (mazeBody[playerRow ][playerCol + 1]  == 0))
                     movePlayer(playerRow, playerCol + 1);
             }
         }
