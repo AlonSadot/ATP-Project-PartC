@@ -12,16 +12,16 @@
 <Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <AnchorPane fx:id="mainPane" prefHeight="598.0" prefWidth="786.0">
       <children>
-         <StackPane layoutX="180.0" layoutY="169.0" prefHeight="215.0" prefWidth="373.0" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="214.0" AnchorPane.topAnchor="169.0">
-            <children>
-                <ImageView layoutX="180.0" layoutY="180.0" fx:id="mainImageView" fitHeight="598.0" fitWidth="786.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <image>
-                        <Image url="/images/BackgroundGif.gif"/>
-                    </image>
-                </ImageView>
-               <Button fx:id="Start_button" mnemonicParsing="false" onAction="#buttonStart" prefHeight="124.0" prefWidth="323.0" text="Start" />
-            </children>
-         </StackPane>
+          <ImageView fx:id="mainImageView" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <image>
+                  <Image url="/images/BackgroundGif.gif"/>
+              </image>
+          </ImageView>
+          <StackPane layoutX="180.0" layoutY="169.0" prefHeight="215.0" prefWidth="373.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                  <Button fx:id="Start_button" mnemonicParsing="false" onAction="#buttonStart" prefHeight="124.0" prefWidth="323.0" text="Start" />
+              </children>
+          </StackPane>
       </children>
     </AnchorPane>
 </Scene>

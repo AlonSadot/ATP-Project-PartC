@@ -21,10 +21,10 @@ public class Main extends Application {
         MyViewController viewController = fxmlLoader.getController();
 
         viewController.setMyViewModel(viewModel);
-
         MyViewController.music();
 
         Scene scene = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+//        primaryStage.setFullScreen(true);
         primaryStage.setScene(scene);
         primaryStage.show();
 

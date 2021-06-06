@@ -1,6 +1,7 @@
 package View;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -10,6 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
@@ -25,8 +29,8 @@ public class MiddleSceneController implements Initializable, Observer {
     public Button Play_button;
     public TextField RowText;
     public TextField ColText;
-
-
+    public ImageView mainImageView;
+    public AnchorPane mainPane;
 
     public void returnToMenu(ActionEvent event) throws IOException {
         Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
@@ -59,5 +63,7 @@ public class MiddleSceneController implements Initializable, Observer {
         boolean playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
         if (!playing)
             MyViewController.music();
+        mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
+        mainImageView.fitHeightProperty().bind(mainPane.heightProperty());
     }
 }

@@ -49,6 +49,7 @@ public class MyViewController implements IView, Initializable, Observer {
     public static void music() {
         Media media = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
     }
 
