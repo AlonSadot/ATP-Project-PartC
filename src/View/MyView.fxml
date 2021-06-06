@@ -8,7 +8,7 @@
 <Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <AnchorPane prefHeight="574.0" prefWidth="767.0">
       <children>
-         <StackPane layoutX="-247.0" layoutY="54.0" prefHeight="468.0" prefWidth="558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="54.0">
+         <StackPane layoutX="-247.0" layoutY="188.0" prefHeight="386.0" prefWidth="443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="188.0">
             <children>
                <Button fx:id="Start_button" mnemonicParsing="false" onAction="#buttonStart" prefHeight="124.0" prefWidth="323.0" text="Start" />
             </children>

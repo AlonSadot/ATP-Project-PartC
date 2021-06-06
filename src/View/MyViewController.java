@@ -1,9 +1,7 @@
 package View;
 
 
-//import java.awt.event.ActionEvent;
-import Model.IModel;
-import Model.MyModel;
+
 import ViewModel.MyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -11,16 +9,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.IOException;
+
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -34,6 +33,7 @@ public class MyViewController implements IView, Initializable, Observer {
 //    public MazeDisplay mazeDisplay;
     public Label playerRow;
     public Label playerCol;
+    public static MediaPlayer mediaPlayer;
 
     @FXML
     private Button Start_button;
@@ -41,10 +41,12 @@ public class MyViewController implements IView, Initializable, Observer {
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
 
-//    public void genTest(ActionEvent actionEvent){
-//        System.out.println("Good Try");
-//
-//    }
+    public void music() {
+        Media media = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+    }
+
 
     public void setMyViewModel(MyViewModel myViewModel) {
         this.myViewModel = myViewModel;
@@ -70,46 +72,14 @@ public class MyViewController implements IView, Initializable, Observer {
         this.updatePlayerCol.set(updatePlayerCol + "");
     }
 
-//    public void setPlayerPosition(int row, int col){
-//        mazeDisplay.setPlayerPosition(row, col);
-//        setUpdatePlayerRow(row);
-//        setUpdatePlayerCol(col);
-//    }
 
     public void buttonStart(ActionEvent event) throws IOException {
-        Scene newScene;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
         fxmlLoader.load();
-
-        Parent root2 = FXMLLoader.load(getClass().getResource("MazeWindow.fxml"));
+        mediaPlayer.stop();
+        Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         Start_button.getScene().setRoot(root2);
-
-//        Scene root = FXMLLoader.load(getClass().getResource("MazeWindow.fxml"));
-
-        //scene1 = new Scene(root);
-//        int rows = Integer.valueOf(textField_mazeRows.getText());
-//        int cols = Integer.valueOf(textField_mazeColumns.getText());
-
-//        mazeWindowController.myViewModel.generateMaze(rows, cols);
-//        currStage.setScene(root);
-//        currStage.show();
-
-
-//        mazeWindowController.mazeRows = rows;
-//        mazeWindowController.mazeCols = cols;
     }
-
-//    private void mazeGenerated() {
-//        mazeDisplay.drawMaze(myViewModel.getMaze());
-//    }
-//
-//    private void mazeSolved() {
-//        mazeDisplay.setSolution(myViewModel.getSolution());
-//    }
-//
-//    private void playerMoved() {
-//        setPlayerPosition(myViewModel.getPlayerRow(), myViewModel.getPlayerCol());
-//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

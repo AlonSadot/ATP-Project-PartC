@@ -13,7 +13,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
@@ -24,7 +26,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -45,14 +46,14 @@ public class MazeWindowController implements Initializable, Observer {
 
     @FXML
     public Pane main_pane;
-    public AnchorPane mazeAnchor;
+    public Button tryingButton;
 
-    public void buttonTrying(ActionEvent event) throws IOException {
-        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
-        currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        //scene1 = new Scene(root);
-        currStage.setScene(root);
-        currStage.show();
+    public void returnBack(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
+        fxmlLoader.load();
+
+        Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
+        tryingButton.getScene().setRoot(root2);
     }
 
     public void setMazeViewModel(MyViewModel myViewModel) {
