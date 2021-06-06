@@ -9,8 +9,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
@@ -162,7 +162,7 @@ public class MazeDisplay extends Canvas {
         double x = getPlayerCol() * cellWidth;
         double y = getPlayerRow() * cellHeight;
 
-        ImageView playerImage =  new ImageView(picturePath);
+        Image playerImage =  new Image(picturePath);
         if(playerImage == null)
             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
         else{
@@ -195,6 +195,21 @@ public class MazeDisplay extends Canvas {
                 }
             }
         }
+        Image startingPoint = new Image("file:./resources/images/GreenPort.png");
+        Image goalPoint = new Image("file:./resources/images/PurpPort.png");
+        double x,y;
+        x = maze.getStartPosition().getColumnIndex()*cellWidth;
+        y = maze.getStartPosition().getRowIndex()*cellHeight;
+        graphicsContext.drawImage(startingPoint,x,y,cellWidth,cellHeight);
+        x = maze.getGoalPosition().getColumnIndex()*cellWidth;
+        y = maze.getGoalPosition().getRowIndex()*cellHeight;
+        graphicsContext.drawImage(goalPoint,x,y,cellWidth,cellHeight);
+        if (playerRow == maze.getGoalPosition().getRowIndex() && playerCol == maze.getGoalPosition().getColumnIndex()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Congratulation!");
+            alert.show();
+        }
+
     }
 
 }

@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -37,6 +39,9 @@ public class MyViewController implements IView, Initializable, Observer {
 
     @FXML
     private Button Start_button;
+
+    public ImageView mainImageView;
+    public AnchorPane mainPane;
 
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
@@ -83,6 +88,8 @@ public class MyViewController implements IView, Initializable, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
+        mainImageView.fitHeightProperty().bind(mainPane.heightProperty());
 
     }
 }
