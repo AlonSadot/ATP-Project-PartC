@@ -10,6 +10,7 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
@@ -161,7 +162,7 @@ public class MazeDisplay extends Canvas {
         double x = getPlayerCol() * cellWidth;
         double y = getPlayerRow() * cellHeight;
 
-        Image playerImage =  new Image(picturePath);
+        ImageView playerImage =  new ImageView(picturePath);
         if(playerImage == null)
             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
         else{
