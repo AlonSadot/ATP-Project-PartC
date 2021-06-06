@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,11 +37,14 @@ public class MiddleSceneController implements Initializable, Observer {
 
 
     public void playButton(ActionEvent event) throws IOException{
+        MazeWindowController.setMazeRows(Integer.parseInt(RowText.getText()));
+        MazeWindowController.setMazeCols(Integer.parseInt(ColText.getText()));
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeWindow.fxml"));
         fxmlLoader.load();
-
+        MyViewController.mediaPlayer.stop();
         Parent root2 = FXMLLoader.load(getClass().getResource("MazeWindow.fxml"));
         Play_button.getScene().setRoot(root2);
+
     }
 
 
@@ -52,6 +56,8 @@ public class MiddleSceneController implements Initializable, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        boolean playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
+        if (!playing)
+            MyViewController.music();
     }
 }

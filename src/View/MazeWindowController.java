@@ -39,10 +39,19 @@ public class MazeWindowController implements Initializable, Observer {
     private Stage currStage;
     public MyViewModel myViewModel;
     public MazeDisplay mazeDisplay = new MazeDisplay();
-    public int mazeRows;
-    public int mazeCols;
-    public Label playerRow;
-    public Label playerCol;
+    public static int mazeRows;
+    public static int mazeCols;
+
+    public static void setMazeRows(int mazeRows) {
+        MazeWindowController.mazeRows = mazeRows;
+    }
+
+    public static void setMazeCols(int mazeCols) {
+        MazeWindowController.mazeCols = mazeCols;
+    }
+
+//    public Label playerRow;
+//    public Label playerCol;
 
     @FXML
     public Pane main_pane;
@@ -71,10 +80,6 @@ public class MazeWindowController implements Initializable, Observer {
 
     public void generateMaze(ActionEvent actionEvent) throws IOException {
 
-
-
-
-        this.myViewModel.generateMaze(10, 10);
         //        int rows = Integer.valueOf(textField_mazeRows.getText());
 //        int cols = Integer.valueOf(textField_mazeColumns.getText());
 //        main_pane.setPadding(new Insets(100,100,100,100));
@@ -161,26 +166,11 @@ public class MazeWindowController implements Initializable, Observer {
         IModel model = new MyModel();
         myViewModel = new MyViewModel(model);
         setMazeViewModel(myViewModel);
-
-        InvalidationListener listener = new InvalidationListener(){
-            @Override
-            public void invalidated(javafx.beans.Observable o) {
-                mazeDisplay.draw();
-            }
-        };
-        mazeDisplay.widthProperty().addListener(listener);
-        mazeDisplay.heightProperty().addListener(listener);
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-//        int rows = Integer.valueOf(textField_mazeRows.getText());
-//        int cols = Integer.valueOf(textField_mazeColumns.getText());
-
-        //        playerRow.textProperty().bind(updatePlayerRow);
-//        playerCol.textProperty().bind(updatePlayerCol);
+        this.myViewModel.generateMaze(mazeRows, mazeCols);
     }
 
     private void mazeSolved() {

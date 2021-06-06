@@ -41,7 +41,7 @@ public class MyViewController implements IView, Initializable, Observer {
     StringProperty updatePlayerRow = new SimpleStringProperty();
     StringProperty updatePlayerCol = new SimpleStringProperty();
 
-    public void music() {
+    public static void music() {
         Media media = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
@@ -76,7 +76,7 @@ public class MyViewController implements IView, Initializable, Observer {
     public void buttonStart(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
         fxmlLoader.load();
-        mediaPlayer.stop();
+//        mediaPlayer.stop();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         Start_button.getScene().setRoot(root2);
     }

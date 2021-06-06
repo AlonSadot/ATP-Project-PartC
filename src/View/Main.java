@@ -21,7 +21,8 @@ public class Main extends Application {
         MyViewController viewController = fxmlLoader.getController();
 
         viewController.setMyViewModel(viewModel);
-        viewController.music();
+
+        MyViewController.music();
 
         Scene scene = FXMLLoader.load(getClass().getResource("MyView.fxml"));
         primaryStage.setScene(scene);
