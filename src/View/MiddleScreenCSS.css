@@ -1,5 +1,5 @@
 Button {
-    -fx-font-size: 40;
+    -fx-font-size: 72;
     -fx-text-fill: #000000;
     -fx-font-family: "Serif";
     -fx-font-weight: bold;
@@ -11,7 +11,7 @@ Button {
     -fx-border-color:black;
     -fx-border-width: 3 3 3 3;
 
-    -fx-background-image: url("/images/GreenStone.png");
+    -fx-background-image: url("/images/Stone.png");
     /*-fx-background-size: 30px;*/
     -fx-background-repeat: no-repeat;
     -fx-background-position: 90%;

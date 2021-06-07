@@ -116,12 +116,31 @@ public class MyModel extends Observable implements IModel{
                 if (playerRow > 0 && (mazeBody[playerRow - 1][playerCol]  == 0))
                     movePlayer(playerRow - 1, playerCol);
             }
+            case UPRIGHT -> {
+                if (playerRow > 0 && playerCol < mazeBody[0].length - 1 && mazeBody[playerRow - 1][playerCol+1]  == 0 && (mazeBody[playerRow - 1][playerCol]  == 0 || mazeBody[playerRow][playerCol+1]  == 0 ))
+                    movePlayer(playerRow - 1, playerCol+1);
+            }
+            case UPLEFT -> {
+                if (playerRow > 0 && playerCol > 0 && mazeBody[playerRow - 1][playerCol - 1]  == 0 && (mazeBody[playerRow - 1][playerCol]  == 0 || mazeBody[playerRow][playerCol-1]  == 0 ))
+                    movePlayer(playerRow - 1, playerCol-1);
+            }
             case DOWN -> {
                 if (playerRow < mazeBody.length - 1 && (mazeBody[playerRow + 1][playerCol]  == 0) )
                     movePlayer(playerRow + 1, playerCol);
             }
+
+            case DOWNRIGHT -> {
+                if (playerRow < mazeBody.length - 1 && playerCol < mazeBody[0].length - 1 && mazeBody[playerRow + 1][playerCol+1]  == 0 && (mazeBody[playerRow + 1][playerCol]  == 0 || mazeBody[playerRow][playerCol+1]  == 0 ))
+                    movePlayer(playerRow + 1, playerCol+1);
+            }
+
+            case DOWNLEFT -> {
+                if (playerRow < mazeBody.length - 1 && playerCol > 0 && mazeBody[playerRow + 1][playerCol - 1]  == 0 && (mazeBody[playerRow + 1][playerCol]  == 0 || mazeBody[playerRow][playerCol-1]  == 0 ))
+                    movePlayer(playerRow + 1, playerCol-1);
+            }
+
             case LEFT -> {
-                if (playerCol > 0 && (mazeBody[playerRow ][playerCol- 1]  == 0))
+                if (playerCol > 0 && (mazeBody[playerRow][playerCol- 1]  == 0))
                     movePlayer(playerRow, playerCol - 1);
             }
             case RIGHT -> {

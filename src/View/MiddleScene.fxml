@@ -10,24 +10,23 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.image.*?>
 
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MiddleSceneController">
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MiddleSceneController" stylesheets="@MiddleScreenCSS.css" >
    <children>
        <ImageView fx:id="mainImageView" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
            <image>
                <Image url="/images/MiddlePic.jpg" />
            </image>
        </ImageView>
-      <GridPane fx:id="mainGrid" layoutY="8.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane fx:id="mainGrid" pickOnBounds="true" prefHeight="400.0" prefWidth="677.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="160.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="152.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="132.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -36,48 +35,47 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="Menu_button" contentDisplay="RIGHT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="58.0" prefWidth="193.0" text="Back to Main Menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="3" />
-            <Button fx:id="Play_button" mnemonicParsing="false" onAction="#playButton" prefHeight="103.0" prefWidth="162.0" text="Start" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
-               <font>
-                  <Font size="18.0" />
-               </font></Button>
-            <GridPane GridPane.columnSpan="2">
+            <GridPane GridPane.columnSpan="2" GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="RowText" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Row" GridPane.columnIndex="1" />
-                  <TextField fx:id="ColText" prefHeight="26.0" prefWidth="146.0" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Column" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="RowText" GridPane.columnIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter Row number" />
+                  <TextField fx:id="ColText" prefHeight="26.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter Column number" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Label text="Choose Dragon" GridPane.rowIndex="2">
+            <Label text="Choose Dragon" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
                <padding>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="10.0" />
                </padding>
             </Label>
-            <VBox prefHeight="46.0" prefWidth="150.0" spacing="70.0" GridPane.rowIndex="3" GridPane.rowSpan="2">
-               <children>
+            <Button fx:id="Play_button" mnemonicParsing="false" onAction="#playButton" prefHeight="80.0" prefWidth="201.0" text="Start" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="Menu_button" contentDisplay="RIGHT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="80.0" prefWidth="201.0" text="Back to Main Menu" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                  <RadioButton fx:id="rb1" mnemonicParsing="false" text="RadioButton">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="toggleGroup" />
-                     </toggleGroup></RadioButton>
-                  <RadioButton fx:id="rb2" mnemonicParsing="false" text="RadioButton" toggleGroup="$toggleGroup" />
-                  <RadioButton fx:id="rb3" mnemonicParsing="false" text="RadioButton" toggleGroup="$toggleGroup" />
-               </children>
-            </VBox>
+            <RadioButton fx:id="rb1" mnemonicParsing="false" text="RadioButton" GridPane.rowIndex="4">
+               <toggleGroup>
+                  <ToggleGroup fx:id="toggleGroup" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rb2" mnemonicParsing="false" text="RadioButton" toggleGroup="$toggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <RadioButton fx:id="rb3" mnemonicParsing="false" text="RadioButton" toggleGroup="$toggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
 

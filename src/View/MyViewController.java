@@ -47,9 +47,16 @@ public class MyViewController implements IView, Initializable, Observer {
     StringProperty updatePlayerCol = new SimpleStringProperty();
 
     public static void music() {
-        Media media = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
-        mediaPlayer = new MediaPlayer(media);
+        Media mediaMusic = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
+        mediaPlayer = new MediaPlayer(mediaMusic);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+    }
+
+    public static void mouseAudio(){
+        Media mouseClicked = new Media((Paths.get("./resources/music/Click.mp3").toUri().toString()));
+        mediaPlayer = new MediaPlayer(mouseClicked);
+        mediaPlayer.setCycleCount(1);
         mediaPlayer.play();
     }
 
@@ -61,13 +68,6 @@ public class MyViewController implements IView, Initializable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-//        String change = (String) arg;
-//        switch (change){
-//            case "maze generated" -> mazeGenerated();
-//            case "player moved" -> playerMoved();
-//            case "maze solved" -> mazeSolved();
-//            default -> System.out.println("Not implemented change: " + change);
-//        }
     }
 
     public void setUpdatePlayerRow(int updatePlayerRow) {
@@ -80,9 +80,9 @@ public class MyViewController implements IView, Initializable, Observer {
 
 
     public void buttonStart(ActionEvent event) throws IOException {
+        mouseAudio();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
         fxmlLoader.load();
-//        mediaPlayer.stop();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         Start_button.getScene().setRoot(root2);
     }

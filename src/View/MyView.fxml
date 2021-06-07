@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<!--<?import javafx.scene.image.Image?>-->
-
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+
+<Scene stylesheets="@MyViewCSS.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <AnchorPane fx:id="mainPane" prefHeight="598.0" prefWidth="786.0">
       <children>
           <ImageView fx:id="mainImageView" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -19,7 +20,31 @@
           </ImageView>
           <StackPane layoutX="180.0" layoutY="169.0" prefHeight="215.0" prefWidth="373.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                  <Button fx:id="Start_button" mnemonicParsing="false" onAction="#buttonStart" prefHeight="124.0" prefWidth="323.0" text="Start" />
+                  <Button fx:id="Start_button" mnemonicParsing="false" onAction="#buttonStart" prefHeight="26.0" prefWidth="323.0" text="New Game">
+                  <StackPane.margin>
+                     <Insets bottom="150.0" top="-20.0" />
+                  </StackPane.margin>
+               </Button>
+               <Button fx:id="Start_button1" mnemonicParsing="false" onAction="#buttonStart" prefHeight="72.0" prefWidth="323.0" text="Load">
+                  <StackPane.margin>
+                     <Insets top="-10.0" />
+                  </StackPane.margin>
+               </Button>
+               <Button fx:id="Start_button11" mnemonicParsing="false" onAction="#buttonStart" prefHeight="31.0" prefWidth="320.0" text="Options">
+                  <StackPane.margin>
+                     <Insets top="150.0" />
+                  </StackPane.margin>
+               </Button>
+               <Button fx:id="Start_button111" mnemonicParsing="false" onAction="#buttonStart" prefHeight="31.0" prefWidth="320.0" text="Exit">
+                  <StackPane.margin>
+                     <Insets top="470.0" />
+                  </StackPane.margin>
+               </Button>
+               <Button fx:id="Start_button112" mnemonicParsing="false" onAction="#buttonStart" prefHeight="31.0" prefWidth="320.0" text="About">
+                  <StackPane.margin>
+                     <Insets top="310.0" />
+                  </StackPane.margin>
+               </Button>
               </children>
           </StackPane>
       </children>

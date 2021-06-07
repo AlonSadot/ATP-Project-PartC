@@ -30,11 +30,9 @@ public class Main extends Application {
 
 
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
-//        Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
-//        solveSearchProblemServer.start();
+        Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+        solveSearchProblemServer.start();
         mazeGeneratingServer.start();
-
-
     }
 
     public static void main(String[] args) {

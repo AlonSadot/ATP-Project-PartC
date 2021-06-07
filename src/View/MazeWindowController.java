@@ -26,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseWheelListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -53,9 +54,10 @@ public class MazeWindowController implements Initializable, Observer {
 //    public Label playerRow;
 //    public Label playerCol;
 
-    @FXML
+
     public Pane main_pane;
     public Button tryingButton;
+
 
     public void returnBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
@@ -78,42 +80,6 @@ public class MazeWindowController implements Initializable, Observer {
         mazeDisplay.requestFocus();
     }
 
-    public void generateMaze(ActionEvent actionEvent) throws IOException {
-
-        //        int rows = Integer.valueOf(textField_mazeRows.getText());
-//        int cols = Integer.valueOf(textField_mazeColumns.getText());
-//        main_pane.setPadding(new Insets(100,100,100,100));
-//        if (main_pane == null)
-//            System.out.println("pane is null");
-//        Image image1 = new Image("file:/D:/LocalTemps/Avatar6.jpg");
-//        ImageView imageView1 = new ImageView(image1);
-//        imageView1.setFitHeight(250);
-//        imageView1.setFitWidth(250);
-//        imageView1.setX(100);
-//        imageView1.setY(200);
-//        main_pane.getChildren().add(imageView1);
-//        mazeDisplay.scaleXProperty().bind(mazeDisplay.getScene().widthProperty().multiply(0.5));
-//        mazeDisplay.scaleYProperty().bind(mazeDisplay.getScene().heightProperty().multiply(0.5));
-
-
-
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeWindow.fxml"));
-//        try {
-//            fxmlLoader.load();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        IModel model = new MyModel();
-//        this.myViewModel = new MyViewModel(model);
-//        MazeWindowController mazeWindowController = fxmlLoader.getController();
-//        mazeWindowController.setMazeViewModel(myViewModel);
-//
-//        mazeRows = 50;
-//        mazeCols = 50;
-
-//        this.myViewModel.generateMaze(mazeRows, mazeCols);
-
-    }
 
     public void solveMaze(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -140,6 +106,25 @@ public class MazeWindowController implements Initializable, Observer {
 //        fc.setInitialDirectory(new File("./resources"));
 //        File chosen = fc.showOpenDialog(null);
 //        //...
+//    }
+
+//    addKeyListener(new KeyListener() {
+//
+//        @Override
+//        public void keyPressed(KeyEvent e) {
+//
+//
+//            addMouseWheelListener(new MouseWheelListener() {
+//
+//                @Override
+//                public void mouseScrolled(MouseEvent g) {
+//                    if((g.stateMask & SWT.CONTROL) == SWT.CONTROL) {
+//                        performZoom(g.count);
+//                    }
+//                }
+//            });
+//
+//        }
 //    }
 
     public void setUpdatePlayerRow(int updatePlayerRow) {

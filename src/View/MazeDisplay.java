@@ -2,6 +2,8 @@ package View;
 
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.AState;
+import algorithms.search.MazeState;
 import algorithms.search.Solution;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -88,7 +90,6 @@ public class MazeDisplay extends Canvas {
 
     public void setSolution(Solution solution){
         this.solution = solution;
-        //draw();
     }
 
     public int getPlayerCol(){
@@ -130,13 +131,20 @@ public class MazeDisplay extends Canvas {
 
     private void drawSolution(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
         // need to be implemented
+        Image solutionImage = new Image("/images/FireSolve.png");
+
+        Position sol;
+        for (AState state : solution.getSolutionPath()){
+            sol = (Position)(state).getObject();
+            graphicsContext.drawImage(solutionImage, sol.getColumnIndex()*cellWidth, sol.getRowIndex()*cellHeight, cellWidth, cellHeight);
+
+        }
+
         System.out.println("drawing solution...");
     }
 
-    public void draw() {
-        /*
-        Might need to change back to private
-         */
+    private void draw() {
+
         if(maze != null){
             int[][] mazeBody = maze.getMatrix();
             double canvasHeight = getHeight();

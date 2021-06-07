@@ -9,7 +9,7 @@
       <children>
             <MazeDisplay fx:id="mazeDisplay" height="332.0" imageFileNameWall="./resources/images/WallBlock.png" onKeyPressed="#keyPressed" width="397.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="tryingButton" mnemonicParsing="false" onAction="#returnBack" prefHeight="33.0" prefWidth="69.0" text="Trying" />
-      <Button fx:id="Generate_Button" layoutX="70.0" layoutY="-1.0" mnemonicParsing="false" onAction="#generateMaze" prefHeight="36.0" prefWidth="71.0" text="Generate" />
+      <Button fx:id="Solve_Button" layoutX="70.0" layoutY="-1.0" mnemonicParsing="false" onAction="#solveMaze" prefHeight="36.0" prefWidth="71.0" text="Solve" />
       </children>
    </AnchorPane>
 </AnchorPane>
