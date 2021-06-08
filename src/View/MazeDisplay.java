@@ -193,8 +193,6 @@ public class MazeDisplay extends Canvas {
             int[][] mazeBody = maze.getMatrix();
             double canvasHeight = getHeight();
             double canvasWidth = getWidth();
-            System.out.println(canvasHeight);
-            System.out.println(canvasWidth);
             int rows = mazeBody.length;
             int cols = mazeBody[0].length;
 

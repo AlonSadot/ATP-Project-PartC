@@ -2,13 +2,24 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
+<!--<?import View.*?>-->
 <?import View.*?>
-<AnchorPane onScroll="#getOnScrollEventHandler" onMouseClicked="#mouseClicked" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeWindowController" fx:id="main_pane" prefHeight="488.0" prefWidth="823.0">
-   <children>
-      <MazeDisplay fx:id="mazeDisplay" height="332.0" imageFileNameWall="./resources/images/WallBlock.png" onKeyPressed="#keyPressed" width="397.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Button fx:id="tryingButton" mnemonicParsing="false" onAction="#returnBack" prefHeight="33.0" prefWidth="69.0" text="Trying" />
-      <Button fx:id="Solve_Button" layoutX="70.0" layoutY="-1.0" mnemonicParsing="false" onAction="#solveMaze" prefHeight="36.0" prefWidth="71.0" text="Solve" />
-      <Button fx:id="saveButton" layoutX="141.0" mnemonicParsing="false" onAction="#SaveMaze" prefHeight="36.0" prefWidth="71.0" text="Save" />
-   </children>
+
+<AnchorPane fx:id="main_pane" onMouseClicked="#mouseClicked" onScroll="#ZoomHandle" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeWindowController">
+  <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox prefHeight="36.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="Solve" />
+            <Button mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="Save" />
+            <Button mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="How To Play" />
+            <Button mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="Back to Main Menu" />
+         </children>
+      </HBox>
+      <AnchorPane prefHeight="5000" prefWidth="5000" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <MazeDisplay fx:id="mazeDisplay" height="332.0" imageFileNameWall="./resources/images/WallBlock.png" onKeyPressed="#keyPressed" width="397.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      </AnchorPane>
+  </VBox>
 </AnchorPane>

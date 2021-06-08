@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
@@ -64,7 +65,6 @@ public class MazeWindowController implements Initializable, Observer {
     public static void setMazeCols(int mazeCols) {
         MazeWindowController.mazeCols = mazeCols;
     }
-
 
     public Pane main_pane;
     public Button tryingButton;
@@ -152,8 +152,8 @@ public class MazeWindowController implements Initializable, Observer {
     }
 
     public void setCenterPivot(){
-        main_pane.setTranslateX(main_pane.getTranslateX()/1.5);
-        main_pane.setTranslateY(main_pane.getTranslateY()/1.5);
+        main_pane.setTranslateX(main_pane.getTranslateX()/50);
+        main_pane.setTranslateY(main_pane.getTranslateY()/50);
     }
 
     public double getScale() {
@@ -164,46 +164,42 @@ public class MazeWindowController implements Initializable, Observer {
         myScale.set(scale);
     }
 
-    public EventHandler<ScrollEvent> getOnScrollEventHandler() {
-        return onScrollEventHandler;
+
+    public void mouseDrag(MouseEvent event){
+
     }
 
-    private EventHandler<ScrollEvent> onScrollEventHandler = new EventHandler<ScrollEvent>() {
-
-        @Override
-        public void handle(ScrollEvent event) {
-            boolean flag=false;
+    public void ZoomHandle(ScrollEvent event) {
+        if(event.isControlDown()) {
+            boolean flag = false;
             double delta = 1.2;
 
             double scale = getScale();
             double oldScale = scale;
 
             if (event.getDeltaY() < 0) {
-                scale /= delta; // הקטנה
+                scale /= delta;
                 flag = true;
-            }
-            else {
+            } else {
                 scale *= delta;
             }
-            scale = clamp( scale, MIN_SCALE, MAX_SCALE);
+            scale = clamp(scale, MIN_SCALE, MAX_SCALE);
 
-            double f = (scale / oldScale)-1;
+            double f = (scale / oldScale) - 1;
 
-            double dx = (event.getSceneX() - (main_pane.getBoundsInParent().getWidth()/2 + main_pane.getBoundsInParent().getMinX()));
-            double dy = (event.getSceneY() - (main_pane.getBoundsInParent().getHeight()/2 + main_pane.getBoundsInParent().getMinY()));
+            double dx = (event.getSceneX() - (main_pane.getBoundsInParent().getWidth() / 2 + main_pane.getBoundsInParent().getMinX()));
+            double dy = (event.getSceneY() - (main_pane.getBoundsInParent().getHeight() / 2 + main_pane.getBoundsInParent().getMinY()));
 
             setScale(scale);
 
             if (!flag)
-                setPivot(f*dx, f*dy);
+                setPivot(f * dx, f * dy);
             else {
                 setCenterPivot();
-//                System.out.println("Reached");
             }
             event.consume();
-
-            }
-    };
+        }
+    }
 
     public void setUpdatePlayerRow(int updatePlayerRow) {
         this.updatePlayerRow.set(updatePlayerRow + "");
@@ -242,8 +238,8 @@ public class MazeWindowController implements Initializable, Observer {
         }
         main_pane.scaleXProperty().bind(myScale);
         main_pane.scaleYProperty().bind(myScale);
-        //main_scene.addEventFilter( ScrollEvent.ANY, getOnScrollEventHandler());
-        main_pane.addEventFilter( ScrollEvent.ANY, getOnScrollEventHandler());
+
+
 
     }
 
