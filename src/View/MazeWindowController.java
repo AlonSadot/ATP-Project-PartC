@@ -67,7 +67,7 @@ public class MazeWindowController implements Initializable, Observer {
     }
 
     public Pane main_pane;
-    public Button tryingButton;
+    public Button backButton;
 
 
     public void returnBack(ActionEvent event) throws IOException {
@@ -76,7 +76,7 @@ public class MazeWindowController implements Initializable, Observer {
         fxmlLoader.load();
 
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
-        tryingButton.getScene().setRoot(root2);
+        backButton.getScene().setRoot(root2);
     }
 
     public void setMazeViewModel(MyViewModel myViewModel) {
