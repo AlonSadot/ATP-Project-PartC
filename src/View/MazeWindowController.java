@@ -240,7 +240,6 @@ public class MazeWindowController implements Initializable, Observer {
         else{
             this.myViewModel.loadMaze(loadedName);
         }
-        this.myViewModel.generateMaze(mazeRows, mazeCols);
         main_pane.scaleXProperty().bind(myScale);
         main_pane.scaleYProperty().bind(myScale);
         //main_scene.addEventFilter( ScrollEvent.ANY, getOnScrollEventHandler());
@@ -258,8 +257,8 @@ public class MazeWindowController implements Initializable, Observer {
 
     private void mazeGenerated() {
         mazeDisplay.drawMaze(myViewModel.getMaze());
-        loadedName = null;
     }
 
     private void mazeLoaded(){ mazeDisplay.drawMaze(myViewModel.getMaze()); }
 }
+

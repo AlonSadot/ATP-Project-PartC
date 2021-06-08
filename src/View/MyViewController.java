@@ -59,6 +59,7 @@ public class MyViewController implements IView, Initializable, Observer {
 
     public static void mouseAudio(){
 
+
         Media mouseClicked = new Media((Paths.get("./resources/music/Click.mp3").toUri().toString()));
         MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
         mediaPlayer2.setCycleCount(1);
