@@ -34,6 +34,7 @@ public class MyViewModel extends Observable implements Observer {
         model.saveMaze(name);
     }
 
+
     public Maze getMaze(){
         return model.getMaze();
     }

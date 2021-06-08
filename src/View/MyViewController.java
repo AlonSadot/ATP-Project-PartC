@@ -34,7 +34,6 @@ public class MyViewController implements IView, Initializable, Observer {
     public MyViewModel myViewModel;
     public TextField textField_mazeRows;
     public TextField textField_mazeColumns;
-//    public MazeDisplay mazeDisplay;
     public Label playerRow;
     public Label playerCol;
     public static MediaPlayer mediaPlayer;
@@ -61,9 +60,9 @@ public class MyViewController implements IView, Initializable, Observer {
     public static void mouseAudio(){
 
         Media mouseClicked = new Media((Paths.get("./resources/music/Click.mp3").toUri().toString()));
-        mediaPlayer = new MediaPlayer(mouseClicked);
-        mediaPlayer.setCycleCount(1);
-        mediaPlayer.play();
+        MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
+        mediaPlayer2.setCycleCount(1);
+        mediaPlayer2.play();
     }
 
 
@@ -77,6 +76,8 @@ public class MyViewController implements IView, Initializable, Observer {
     @Override
     public void update(Observable o, Object arg) {
     }
+
+
 
     public void setUpdatePlayerRow(int updatePlayerRow) {
         this.updatePlayerRow.set(updatePlayerRow + "");
@@ -111,6 +112,11 @@ public class MyViewController implements IView, Initializable, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (mediaPlayer != null) {
+            boolean playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
+            if (!playing)
+                MyViewController.music();
+        }
         mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
         mainImageView.fitHeightProperty().bind(mainPane.heightProperty());
 

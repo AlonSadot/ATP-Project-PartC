@@ -13,11 +13,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 
 public class MazeDisplay extends Canvas {
 
@@ -27,7 +30,7 @@ public class MazeDisplay extends Canvas {
     private int playerCol = 0;
     String picturePath = "file:./resources/images/DragonDown.png";
     public static int DragonColor = 1;
-
+    public static MediaPlayer mediaPlayer;
 
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
@@ -77,6 +80,13 @@ public class MazeDisplay extends Canvas {
         super.setWidth(width);
         super.setHeight(height);
         draw();
+    }
+
+    public static void goalReached() {
+        Media mediaMusic = new Media(Paths.get("./resources/music/GoalReached.mp3").toUri().toString());
+        mediaPlayer = new MediaPlayer(mediaMusic);
+        mediaPlayer.setCycleCount(1);
+        mediaPlayer.play();
     }
 
     public void setPlayerPosition(int row, int col) {
@@ -153,10 +163,14 @@ public class MazeDisplay extends Canvas {
         this.imageFileNamePlayer.set(imageFileNamePlayer);
     }
 
+
+
     public void drawMaze(Maze maze) {
         this.maze = maze;
         draw();
     }
+
+
 
     private void drawSolution(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
         // need to be implemented
@@ -172,12 +186,15 @@ public class MazeDisplay extends Canvas {
         System.out.println("drawing solution...");
     }
 
-    private void draw() {
 
+
+    private void draw() {
         if(maze != null){
             int[][] mazeBody = maze.getMatrix();
             double canvasHeight = getHeight();
             double canvasWidth = getWidth();
+            System.out.println(canvasHeight);
+            System.out.println(canvasWidth);
             int rows = mazeBody.length;
             int cols = mazeBody[0].length;
 
@@ -242,6 +259,7 @@ public class MazeDisplay extends Canvas {
         y = maze.getGoalPosition().getRowIndex()*cellHeight;
         graphicsContext.drawImage(goalPoint,x,y,cellWidth,cellHeight);
         if (playerRow == maze.getGoalPosition().getRowIndex() && playerCol == maze.getGoalPosition().getColumnIndex()){
+            goalReached();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Congratulation!");
             alert.show();

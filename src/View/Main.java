@@ -4,33 +4,30 @@ import Model.IModel;
 import Server.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import Model.*;
 import ViewModel.*;
 
-import java.io.File;
-
 public class Main extends Application {
 
+    static boolean playing = false;
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         fxmlLoader.load();
 
-        IModel model = new MyModel();
-        MyViewModel viewModel = new MyViewModel(model);
-        MyViewController viewController = fxmlLoader.getController();
+//        IModel model = new MyModel();
+//        MyViewModel viewModel = new MyViewModel(model);
+//        MyViewController viewController = fxmlLoader.getController();
 
-        viewController.setMyViewModel(viewModel);
-        MyViewController.music();
+//        viewController.setMyViewModel(viewModel);
 
-        //myContainer.setBackground(new Background(myBI));
+        if (MyViewController.mediaPlayer != null)
+            playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
+        if (!playing)
+            MyViewController.music();
 
         Scene scene = FXMLLoader.load(getClass().getResource("MyView.fxml"));
 //        primaryStage.setFullScreen(true);

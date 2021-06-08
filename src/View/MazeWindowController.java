@@ -3,24 +3,21 @@ package View;
 import Model.IModel;
 import Model.MyModel;
 import ViewModel.MyViewModel;
-import javafx.beans.InvalidationListener;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Label;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -54,6 +51,11 @@ public class MazeWindowController implements Initializable, Observer {
     public static void setLoadedName(String name) {
         MazeWindowController.loadedName = name;
     }
+
+    private static final double MAX_SCALE = 10.0d;
+    private static final double MIN_SCALE = 1.0d;
+    DoubleProperty myScale = new SimpleDoubleProperty(1.0);
+
 
     public static void setMazeRows(int mazeRows) {
         MazeWindowController.mazeRows = mazeRows;
@@ -132,24 +134,76 @@ public class MazeWindowController implements Initializable, Observer {
 //        //...
 //    }
 
-//    addKeyListener(new KeyListener() {
-//
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//
-//
-//            addMouseWheelListener(new MouseWheelListener() {
-//
-//                @Override
-//                public void mouseScrolled(MouseEvent g) {
-//                    if((g.stateMask & SWT.CONTROL) == SWT.CONTROL) {
-//                        performZoom(g.count);
-//                    }
-//                }
-//            });
-//
-//        }
-//    }
+    public static double clamp(double value, double min, double max) {
+
+        if( Double.compare(value, min) < 0)
+            return min;
+
+        if( Double.compare(value, max) > 0)
+            return max;
+
+        return value;
+    }
+
+
+    public void setPivot( double x, double y) {
+        main_pane.setTranslateX(main_pane.getTranslateX()-x);
+        main_pane.setTranslateY(main_pane.getTranslateY()-y);
+    }
+
+    public void setCenterPivot(){
+        main_pane.setTranslateX(main_pane.getTranslateX()/1.5);
+        main_pane.setTranslateY(main_pane.getTranslateY()/1.5);
+    }
+
+    public double getScale() {
+        return myScale.get();
+    }
+
+    public void setScale( double scale) {
+        myScale.set(scale);
+    }
+
+    public EventHandler<ScrollEvent> getOnScrollEventHandler() {
+        return onScrollEventHandler;
+    }
+
+    private EventHandler<ScrollEvent> onScrollEventHandler = new EventHandler<ScrollEvent>() {
+
+        @Override
+        public void handle(ScrollEvent event) {
+            boolean flag=false;
+            double delta = 1.2;
+
+            double scale = getScale();
+            double oldScale = scale;
+
+            if (event.getDeltaY() < 0) {
+                scale /= delta; // הקטנה
+                flag = true;
+            }
+            else {
+                scale *= delta;
+            }
+            scale = clamp( scale, MIN_SCALE, MAX_SCALE);
+
+            double f = (scale / oldScale)-1;
+
+            double dx = (event.getSceneX() - (main_pane.getBoundsInParent().getWidth()/2 + main_pane.getBoundsInParent().getMinX()));
+            double dy = (event.getSceneY() - (main_pane.getBoundsInParent().getHeight()/2 + main_pane.getBoundsInParent().getMinY()));
+
+            setScale(scale);
+
+            if (!flag)
+                setPivot(f*dx, f*dy);
+            else {
+                setCenterPivot();
+//                System.out.println("Reached");
+            }
+            event.consume();
+
+            }
+    };
 
     public void setUpdatePlayerRow(int updatePlayerRow) {
         this.updatePlayerRow.set(updatePlayerRow + "");
@@ -186,6 +240,12 @@ public class MazeWindowController implements Initializable, Observer {
         else{
             this.myViewModel.loadMaze(loadedName);
         }
+        this.myViewModel.generateMaze(mazeRows, mazeCols);
+        main_pane.scaleXProperty().bind(myScale);
+        main_pane.scaleYProperty().bind(myScale);
+        //main_scene.addEventFilter( ScrollEvent.ANY, getOnScrollEventHandler());
+        main_pane.addEventFilter( ScrollEvent.ANY, getOnScrollEventHandler());
+
     }
 
     private void mazeSolved() {

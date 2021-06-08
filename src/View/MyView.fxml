@@ -45,7 +45,6 @@
                  <Insets top="470.0" />
               </StackPane.margin>
                </Button>
-
               </children>
           </StackPane>
       </children>
