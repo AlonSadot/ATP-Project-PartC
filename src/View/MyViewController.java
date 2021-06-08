@@ -17,7 +17,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.net.URL;
@@ -40,6 +42,9 @@ public class MyViewController implements IView, Initializable, Observer {
     @FXML
     private Button Start_button;
 
+    @FXML
+    public Button Button_Exit;
+
     public ImageView mainImageView;
     public AnchorPane mainPane;
 
@@ -59,6 +64,8 @@ public class MyViewController implements IView, Initializable, Observer {
         mediaPlayer.setCycleCount(1);
         mediaPlayer.play();
     }
+
+
 
 
     public void setMyViewModel(MyViewModel myViewModel) {
@@ -85,6 +92,20 @@ public class MyViewController implements IView, Initializable, Observer {
         fxmlLoader.load();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         Start_button.getScene().setRoot(root2);
+    }
+
+    public void buttonLoad(ActionEvent event) throws IOException {
+        mouseAudio();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoadWindow.fxml"));
+        fxmlLoader.load();
+        Parent root2 = FXMLLoader.load(getClass().getResource("LoadWindow.fxml"));
+        Start_button.getScene().setRoot(root2);
+    }
+
+    public void buttonExit(ActionEvent event) throws IOException {
+        mouseAudio();
+        Stage stage = (Stage) Button_Exit.getScene().getWindow();
+        stage.close();
     }
 
     @Override

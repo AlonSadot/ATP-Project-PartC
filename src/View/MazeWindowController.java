@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.awt.event.MouseWheelListener;
@@ -37,11 +38,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class MazeWindowController implements Initializable, Observer {
-    private Stage currStage;
     public MyViewModel myViewModel;
     public MazeDisplay mazeDisplay = new MazeDisplay();
     public static int mazeRows;
     public static int mazeCols;
+    public static String loadedName = null;
+    public static boolean mazeType = true;
+
+
+
+    public static void setMazeType(boolean state) {
+        MazeWindowController.mazeType = state;
+    }
+
+    public static void setLoadedName(String name) {
+        MazeWindowController.loadedName = name;
+    }
 
     public static void setMazeRows(int mazeRows) {
         MazeWindowController.mazeRows = mazeRows;
@@ -51,15 +63,13 @@ public class MazeWindowController implements Initializable, Observer {
         MazeWindowController.mazeCols = mazeCols;
     }
 
-//    public Label playerRow;
-//    public Label playerCol;
-
 
     public Pane main_pane;
     public Button tryingButton;
 
 
     public void returnBack(ActionEvent event) throws IOException {
+        MyViewController.mouseAudio();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
         fxmlLoader.load();
 
@@ -82,10 +92,24 @@ public class MazeWindowController implements Initializable, Observer {
 
 
     public void solveMaze(ActionEvent actionEvent) {
+        MyViewController.mouseAudio();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Solving maze...");
         alert.show();
         myViewModel.solveMaze();
+    }
+
+    public void SaveMaze(ActionEvent actionEvent){
+        MyViewController.mouseAudio();
+        Popup popup = new Popup();
+        Label label = new Label("This is America");
+        popup.getContent().add(label);
+        label.setMinWidth(80);
+        label.setMinHeight(50);
+        label.setStyle(" -fx-background-color: black;");
+        popup.show((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
+        String pepe = "Sturgian Fian Champion 260 bow skill";
+        myViewModel.saveMaze(pepe);
     }
 
     public void keyPressed(KeyEvent keyEvent) {
@@ -143,6 +167,7 @@ public class MazeWindowController implements Initializable, Observer {
             case "maze generated" -> mazeGenerated();
             case "player moved" -> playerMoved();
             case "maze solved" -> mazeSolved();
+            case "maze loaded" -> mazeLoaded();
             default -> System.out.println("Not implemented change: " + change);
         }
     }
@@ -155,7 +180,12 @@ public class MazeWindowController implements Initializable, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.myViewModel.generateMaze(mazeRows, mazeCols);
+        if (mazeType == true){
+            this.myViewModel.generateMaze(mazeRows, mazeCols);
+        }
+        else{
+            this.myViewModel.loadMaze(loadedName);
+        }
     }
 
     private void mazeSolved() {
@@ -168,5 +198,8 @@ public class MazeWindowController implements Initializable, Observer {
 
     private void mazeGenerated() {
         mazeDisplay.drawMaze(myViewModel.getMaze());
+        loadedName = null;
     }
+
+    private void mazeLoaded(){ mazeDisplay.drawMaze(myViewModel.getMaze()); }
 }

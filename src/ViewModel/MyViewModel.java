@@ -30,6 +30,10 @@ public class MyViewModel extends Observable implements Observer {
         model.generateMaze(rows,cols);
     }
 
+    public void saveMaze(String name){
+        model.saveMaze(name);
+    }
+
     public Maze getMaze(){
         return model.getMaze();
     }
@@ -63,6 +67,10 @@ public class MyViewModel extends Observable implements Observer {
     }
 
     public int getPlayerCol(){ return model.getPlayerCol(); }
+
+    public void loadMaze(String mazeName){
+        model.loadMaze(mazeName);
+    }
 
 }
 

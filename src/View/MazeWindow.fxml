@@ -4,12 +4,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import View.MazeDisplay?>
+
 <AnchorPane fx:id="main_pane" onMouseClicked="#mouseClicked" prefHeight="489.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeWindowController">
    <AnchorPane prefHeight="488.0" prefWidth="823.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
             <MazeDisplay fx:id="mazeDisplay" height="332.0" imageFileNameWall="./resources/images/WallBlock.png" onKeyPressed="#keyPressed" width="397.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Button fx:id="tryingButton" mnemonicParsing="false" onAction="#returnBack" prefHeight="33.0" prefWidth="69.0" text="Trying" />
       <Button fx:id="Solve_Button" layoutX="70.0" layoutY="-1.0" mnemonicParsing="false" onAction="#solveMaze" prefHeight="36.0" prefWidth="71.0" text="Solve" />
+      <Button fx:id="saveButton" layoutX="141.0" mnemonicParsing="false" onAction="#SaveMaze" prefHeight="36.0" prefWidth="71.0" text="Save" />
       </children>
    </AnchorPane>
 </AnchorPane>

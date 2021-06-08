@@ -26,9 +26,15 @@ public class MazeDisplay extends Canvas {
     private int playerRow = 0;
     private int playerCol = 0;
     String picturePath = "file:./resources/images/DragonDown.png";
+    public static int DragonColor = 1;
+
 
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
+    public static boolean mazeType = true;
+
+
+    public static void setDragonColor(int dragonColor) { MazeDisplay.DragonColor = dragonColor; }
 
     @Override
     public boolean isResizable(){
@@ -74,14 +80,37 @@ public class MazeDisplay extends Canvas {
     }
 
     public void setPlayerPosition(int row, int col) {
-        if (row > playerRow)
-            picturePath = "file:./resources/images/DragonDown.png";
-        else if (row < playerRow)
-            picturePath = "file:./resources/images/DragonUp.png";
-        else if (col >playerCol)
-            picturePath = "file:./resources/images/DragonRight.png";
-        else
-            picturePath = "file:./resources/images/DragonLeft.png";
+        if (DragonColor == 1){
+            if (row > playerRow)
+                picturePath = "file:./resources/images/RedDragonDown.png";
+            else if (row < playerRow)
+                picturePath = "file:./resources/images/RedDragonUp.png";
+            else if (col >playerCol)
+                picturePath = "file:./resources/images/RedDragonRight.png";
+            else
+                picturePath = "file:./resources/images/RedDragonLeft.png";
+        }
+        else if (DragonColor == 2){
+            if (row > playerRow)
+                picturePath = "file:./resources/images/BlueDragonDown.png";
+            else if (row < playerRow)
+                picturePath = "file:./resources/images/BlueDragonUp.png";
+            else if (col >playerCol)
+                picturePath = "file:./resources/images/BlueDragonRight.png";
+            else
+                picturePath = "file:./resources/images/BlueDragonLeft.png";
+        }
+        else{
+            if (row > playerRow)
+                picturePath = "file:./resources/images/YellowDragonDown.png";
+            else if (row < playerRow)
+                picturePath = "file:./resources/images/YellowDragonUp.png";
+            else if (col >playerCol)
+                picturePath = "file:./resources/images/YellowDragonRight.png";
+            else
+                picturePath = "file:./resources/images/YellowDragonLeft.png";
+        }
+
 
         this.playerRow = row;
         this.playerCol = col;

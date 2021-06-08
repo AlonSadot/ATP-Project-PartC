@@ -6,6 +6,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,7 +16,7 @@
 
 <?import javafx.scene.image.*?>
 
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MiddleSceneController" stylesheets="@MiddleScreenCSS.css" >
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@MiddleScreenCSS.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MiddleSceneController">
    <children>
        <ImageView fx:id="mainImageView" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
            <image>
@@ -74,8 +75,23 @@
                   <ToggleGroup fx:id="toggleGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="rb2" mnemonicParsing="false" text="RadioButton" toggleGroup="$toggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <RadioButton fx:id="rb3" mnemonicParsing="false" text="RadioButton" toggleGroup="$toggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <RadioButton fx:id="rb3" mnemonicParsing="false" text="RadioButton" toggleGroup="$toggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <RadioButton fx:id="rb2" mnemonicParsing="false" text="RadioButton" toggleGroup="$toggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ImageView fx:id="Dragon1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5" >
+                <image>
+                    <Image url="/images/RedDrag.gif" />
+                </image>
+            </ImageView>
+            <ImageView fx:id="Dragon2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5" >
+                <image>
+                    <Image url="/images/BlueDrag.gif" />
+                </image>
+            </ImageView>
+            <ImageView fx:id="Dragon3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5" >
+                <image>
+                    <Image url="/images/YellowDrag.gif" />
+                </image>
+            </ImageView>
          </children>
       </GridPane>
 

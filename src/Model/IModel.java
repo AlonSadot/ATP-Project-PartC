@@ -14,4 +14,6 @@ public interface IModel {
     int getPlayerRow();
     int getPlayerCol();
     void assignObserver(Observer o);
+    void saveMaze(String name);
+    void loadMaze(String mazeName);
 }

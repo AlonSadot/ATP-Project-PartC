@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -27,8 +28,11 @@ public class MiddleSceneController implements Initializable, Observer {
     public TextField ColText;
     public ImageView mainImageView;
     public AnchorPane mainPane;
+    public RadioButton rb1;
+    public RadioButton rb2;
 
     public void returnToMenu(ActionEvent event) throws IOException {
+        MyViewController.mouseAudio();
         Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
@@ -37,8 +41,16 @@ public class MiddleSceneController implements Initializable, Observer {
 
 
     public void playButton(ActionEvent event) throws IOException{
+        MyViewController.mouseAudio();
+        if (rb1.isSelected())
+            MazeDisplay.setDragonColor(1);
+        else if (rb2.isSelected())
+            MazeDisplay.setDragonColor(2);
+        else
+            MazeDisplay.setDragonColor(3);
         MazeWindowController.setMazeRows(Integer.parseInt(RowText.getText()));
         MazeWindowController.setMazeCols(Integer.parseInt(ColText.getText()));
+        MazeWindowController.setMazeType(true);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeWindow.fxml"));
         fxmlLoader.load();
         MyViewController.mediaPlayer.stop();
@@ -46,8 +58,6 @@ public class MiddleSceneController implements Initializable, Observer {
         Play_button.getScene().setRoot(root2);
 
     }
-
-
 
     @Override
     public void update(Observable o, Object arg) {
@@ -59,6 +69,8 @@ public class MiddleSceneController implements Initializable, Observer {
         boolean playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
         if (!playing)
             MyViewController.music();
+
+
         mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
         mainImageView.fitHeightProperty().bind(mainPane.heightProperty());
     }

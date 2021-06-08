@@ -4,10 +4,17 @@ import Model.IModel;
 import Server.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import Model.*;
 import ViewModel.*;
+
+import java.io.File;
 
 public class Main extends Application {
 
@@ -22,6 +29,8 @@ public class Main extends Application {
 
         viewController.setMyViewModel(viewModel);
         MyViewController.music();
+
+        //myContainer.setBackground(new Background(myBI));
 
         Scene scene = FXMLLoader.load(getClass().getResource("MyView.fxml"));
 //        primaryStage.setFullScreen(true);
