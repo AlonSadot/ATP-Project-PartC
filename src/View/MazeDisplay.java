@@ -9,10 +9,13 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -21,6 +24,7 @@ import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 public class MazeDisplay extends Canvas {
 
@@ -253,8 +257,25 @@ public class MazeDisplay extends Canvas {
         graphicsContext.drawImage(goalPoint,x,y,cellWidth,cellHeight);
         if (playerRow == maze.getGoalPosition().getRowIndex() && playerCol == maze.getGoalPosition().getColumnIndex()){
             MazeWindowController.goalReached();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Congratulation!");
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("You have won !");
+            alert.setHeaderText("");
+            alert.setContentText("");
+            Image image = new Image("/images/youWin.jpg");
+            ImageView imageView = new ImageView(image);
+            alert.setGraphic(imageView);
+            ButtonType buttonTypeOne = new ButtonType("Back to main menu");
+            ButtonType buttonTypeTwo = new ButtonType("Restart maze");
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne){
+
+            }
+            else {
+
+            }
             alert.show();
         }
 
