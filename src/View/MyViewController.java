@@ -64,8 +64,6 @@ public class MyViewController implements IView, Initializable, Observer {
     }
 
 
-
-
     public void setMyViewModel(MyViewModel myViewModel) {
         this.myViewModel = myViewModel;
         this.myViewModel.addObserver(this);
@@ -88,8 +86,6 @@ public class MyViewController implements IView, Initializable, Observer {
 
     public void buttonStart(ActionEvent event) throws IOException {
         mouseAudio();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
-        fxmlLoader.load();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         Start_button.getScene().setRoot(root2);
     }
