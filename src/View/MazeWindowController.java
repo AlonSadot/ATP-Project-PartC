@@ -44,6 +44,7 @@ public class MazeWindowController implements Initializable, Observer {
     public MazeDisplay mazeDisplay = new MazeDisplay();
     public Pane main_pane;
     public Button backButton;
+    public static double x,y;
 
 
 
@@ -76,8 +77,54 @@ public class MazeWindowController implements Initializable, Observer {
     }
 
 
-    public void mouseDragged(MouseDragEvent event){
+    public void mouseClickedCanvas(MouseEvent event){
+        x=event.getSceneX();
+        y=event.getSceneX();
+    }
 
+    public void mouseDragged(MouseEvent event){
+        double tempx = event.getSceneX();
+        double tempy = event.getSceneY();
+        if (tempx < x && tempy == y) {
+            System.out.println("went left");
+            x=tempx;
+            y=tempy;
+        }
+        if (tempx > x && tempy == y) {
+            System.out.println("went right");
+            x=tempx;
+            y=tempy;
+        }
+        if (tempx == x && tempy > y) {
+            System.out.println("went down");
+            x=tempx;
+            y=tempy;
+        }
+        if (tempx == x && tempy < y) {
+            System.out.println("went up");
+            x=tempx;
+            y=tempy;
+        }
+        if (tempx < x && tempy < y) {
+            System.out.println("went left down");
+            x=tempx;
+            y=tempy;
+        }
+        if (tempx < x && tempy > y) {
+            System.out.println("went left up");
+            x=tempx;
+            y=tempy;
+        }
+        if (tempx > x && tempy > y) {
+            System.out.println("went right up");
+            x=tempx;
+            y=tempy;
+        }
+        if (tempx < x && tempy < y) {
+            System.out.println("went right down");
+            x=tempx;
+            y=tempy;
+        }
     }
 //    public void mouseDragged(MouseDragEvent e) {
 //
