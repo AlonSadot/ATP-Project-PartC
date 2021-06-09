@@ -8,41 +8,37 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
-import java.awt.event.MouseWheelListener;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class MazeWindowController implements Initializable, Observer {
-    public MyViewModel myViewModel;
-    public MazeDisplay mazeDisplay = new MazeDisplay();
     public static int mazeRows;
     public static int mazeCols;
     public static String loadedName = null;
     public static boolean mazeType = true;
-
+    public static MediaPlayer mediaPlayer;
+    public MyViewModel myViewModel;
+    public MazeDisplay mazeDisplay = new MazeDisplay();
+    public Pane main_pane;
+    public Button backButton;
 
 
     public static void setMazeType(boolean state) {
@@ -66,15 +62,13 @@ public class MazeWindowController implements Initializable, Observer {
         MazeWindowController.mazeCols = mazeCols;
     }
 
-    public Pane main_pane;
-    public Button backButton;
 
 
     public void returnBack(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
         fxmlLoader.load();
-
+        mediaPlayer.stop();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         backButton.getScene().setRoot(root2);
     }
@@ -92,6 +86,22 @@ public class MazeWindowController implements Initializable, Observer {
         mazeDisplay.requestFocus();
     }
 
+    public static void goalReached()
+    {   mediaPlayer.stop();
+        Media mediaMusic = new Media(Paths.get("./resources/music/GoalReached.mp3").toUri().toString());
+        mediaPlayer = new MediaPlayer(mediaMusic);
+        mediaPlayer.setCycleCount(1);
+        mediaPlayer.play();
+        mediaPlayer.setVolume(0.3);
+    }
+
+    public static void playMusic(){
+        Media mediaMusic = new Media(Paths.get("./resources/music/MazeTravel.mp3").toUri().toString());
+        mediaPlayer = new MediaPlayer(mediaMusic);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+        mediaPlayer.setVolume(0.15);
+    }
 
     public void solveMaze(ActionEvent actionEvent) {
         MyViewController.mouseAudio();
@@ -103,15 +113,13 @@ public class MazeWindowController implements Initializable, Observer {
 
     public void SaveMaze(ActionEvent actionEvent){
         MyViewController.mouseAudio();
-        Popup popup = new Popup();
-        Label label = new Label("This is America");
-        popup.getContent().add(label);
-        label.setMinWidth(80);
-        label.setMinHeight(50);
-        label.setStyle(" -fx-background-color: black;");
-        popup.show((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
-        String pepe = "Sturgian Fian Champion 260 bow skill";
-        myViewModel.saveMaze(pepe);
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setHeaderText("Saving Maze:");
+        textInputDialog.setTitle("Saving Maze");
+        textInputDialog.setContentText("Please enter the saved maze name:");
+        Optional<String> result = textInputDialog.showAndWait();
+//        String pepe = "Sturgian Fian Champion 260 bow skill";
+        myViewModel.saveMaze(result.get());
     }
 
     public void keyPressed(KeyEvent keyEvent) {
@@ -162,11 +170,6 @@ public class MazeWindowController implements Initializable, Observer {
 
     public void setScale( double scale) {
         myScale.set(scale);
-    }
-
-
-    public void mouseDrag(MouseEvent event){
-
     }
 
     public void ZoomHandle(ScrollEvent event) {
@@ -238,9 +241,7 @@ public class MazeWindowController implements Initializable, Observer {
         }
         main_pane.scaleXProperty().bind(myScale);
         main_pane.scaleYProperty().bind(myScale);
-
-
-
+        playMusic();
     }
 
     private void mazeSolved() {

@@ -54,6 +54,7 @@ public class MiddleSceneController implements Initializable, Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeWindow.fxml"));
         fxmlLoader.load();
         MyViewController.mediaPlayer.stop();
+        MyViewController.playing=false;
         Parent root2 = FXMLLoader.load(getClass().getResource("MazeWindow.fxml"));
         Play_button.getScene().setRoot(root2);
 
@@ -66,8 +67,7 @@ public class MiddleSceneController implements Initializable, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        boolean playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
-        if (!playing)
+        if (!MyViewController.playing)
             MyViewController.music();
 
 

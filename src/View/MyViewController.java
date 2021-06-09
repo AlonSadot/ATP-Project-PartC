@@ -32,18 +32,12 @@ import java.util.ResourceBundle;
 public class MyViewController implements IView, Initializable, Observer {
 
     public MyViewModel myViewModel;
-    public TextField textField_mazeRows;
-    public TextField textField_mazeColumns;
-    public Label playerRow;
-    public Label playerCol;
+
     public static MediaPlayer mediaPlayer;
+    public static boolean playing;
 
-    @FXML
-    private Button Start_button;
-
-    @FXML
+    public Button Start_button;
     public Button Button_Exit;
-
     public ImageView mainImageView;
     public AnchorPane mainPane;
 
@@ -51,10 +45,12 @@ public class MyViewController implements IView, Initializable, Observer {
     StringProperty updatePlayerCol = new SimpleStringProperty();
 
     public static void music() {
+        playing = true;
         Media mediaMusic = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
         mediaPlayer = new MediaPlayer(mediaMusic);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
+        mediaPlayer.setVolume(0.3);
     }
 
     public static void mouseAudio(){
@@ -64,6 +60,7 @@ public class MyViewController implements IView, Initializable, Observer {
         MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
         mediaPlayer2.setCycleCount(1);
         mediaPlayer2.play();
+        mediaPlayer2.setVolume(0.3);
     }
 
 
@@ -114,7 +111,6 @@ public class MyViewController implements IView, Initializable, Observer {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (mediaPlayer != null) {
-            boolean playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
             if (!playing)
                 MyViewController.music();
         }

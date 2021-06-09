@@ -82,12 +82,6 @@ public class MazeDisplay extends Canvas {
         draw();
     }
 
-    public static void goalReached() {
-        Media mediaMusic = new Media(Paths.get("./resources/music/GoalReached.mp3").toUri().toString());
-        mediaPlayer = new MediaPlayer(mediaMusic);
-        mediaPlayer.setCycleCount(1);
-        mediaPlayer.play();
-    }
 
     public void setPlayerPosition(int row, int col) {
         if (DragonColor == 1){
@@ -257,7 +251,7 @@ public class MazeDisplay extends Canvas {
         y = maze.getGoalPosition().getRowIndex()*cellHeight;
         graphicsContext.drawImage(goalPoint,x,y,cellWidth,cellHeight);
         if (playerRow == maze.getGoalPosition().getRowIndex() && playerCol == maze.getGoalPosition().getColumnIndex()){
-            goalReached();
+            MazeWindowController.goalReached();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Congratulation!");
             alert.show();
