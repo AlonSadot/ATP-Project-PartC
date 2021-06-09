@@ -30,12 +30,12 @@
                             <Insets top="-10.0" />
                         </StackPane.margin>
                     </Button>
-                    <Button fx:id="button_Options" mnemonicParsing="false" onAction="#buttonStart" prefHeight="31.0" prefWidth="320.0" text="Options">
+                    <Button fx:id="button_Options" mnemonicParsing="false" onAction="#buttonOptions" prefHeight="31.0" prefWidth="320.0" text="Options">
                         <StackPane.margin>
                             <Insets top="150.0" />
                         </StackPane.margin>
                     </Button>
-                    <Button fx:id="Button_About" mnemonicParsing="false" onAction="#buttonExit" prefHeight="31.0" prefWidth="320.0" text="About">
+                    <Button fx:id="Button_About" mnemonicParsing="false" onAction="#buttonAbout" prefHeight="31.0" prefWidth="320.0" text="About">
                         <StackPane.margin>
                             <Insets top="310.0" />
                         </StackPane.margin>

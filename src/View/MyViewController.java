@@ -88,6 +88,18 @@ public class MyViewController implements IView, Initializable, Observer {
         Start_button.getScene().setRoot(root2);
     }
 
+    public void buttonAbout(ActionEvent event) throws IOException {
+        mouseAudio();
+        Parent root2 = FXMLLoader.load(getClass().getResource("AboutWindow.fxml"));
+        Start_button.getScene().setRoot(root2);
+    }
+
+    public void buttonOptions(ActionEvent event) throws IOException {
+        mouseAudio();
+        Parent root2 = FXMLLoader.load(getClass().getResource("OptionsWindow.fxml"));
+        Start_button.getScene().setRoot(root2);
+    }
+
     public void buttonExit(ActionEvent event) throws IOException {
         mouseAudio();
         Stage stage = (Stage) Button_Exit.getScene().getWindow();

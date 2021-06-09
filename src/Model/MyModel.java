@@ -227,5 +227,4 @@ public class MyModel extends Observable implements IModel{
         notifyObservers("maze loaded");
         movePlayer(playerRow,playerCol);
     }
-
 }

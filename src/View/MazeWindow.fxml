@@ -14,7 +14,7 @@
          <children>
             <Button fx:id="solveButton" mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="Solve" onAction="#solveMaze"/>
             <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="Save" onAction="#SaveMaze"/>
-            <Button fx:id="helpButton" mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="How To Play" />
+            <Button fx:id="helpButton" mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="How To Play" onAction="#helpButton"/>
             <Button fx:id="backButton" mnemonicParsing="false" prefHeight="50" prefWidth="5000" text="Back to Main Menu" onAction="#returnBack"/>
          </children>
       </HBox>

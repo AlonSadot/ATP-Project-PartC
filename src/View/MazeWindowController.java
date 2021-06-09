@@ -206,6 +206,16 @@ public class MazeWindowController implements Initializable, Observer {
         myViewModel.solveMaze();
     }
 
+    public void helpButton(ActionEvent actionEvent){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        alert.setContentText("The goal of the game is to get the dragon to the purple portal. \n" +
+                "you can move your dragon by using the numpad numbers or by dragging your dragon on screen");
+        alert.setGraphic(null);
+        alert.setHeaderText("");
+        alert.show();
+    }
+
     public void SaveMaze(ActionEvent actionEvent){
         MyViewController.mouseAudio();
         TextInputDialog textInputDialog = new TextInputDialog();
@@ -213,15 +223,26 @@ public class MazeWindowController implements Initializable, Observer {
         textInputDialog.setTitle("Saving Maze");
         textInputDialog.setContentText("Please enter the saved maze name:");
         Optional<String> result = textInputDialog.showAndWait();
-//        String pepe = "Sturgian Fian Champion 260 bow skill";
-        if (result.get() != null)
-            myViewModel.saveMaze(result.get());
-        else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Wrong input");
-            alert.setContentText("Please enter a valid name");
-            alert.show();
+        if (textInputDialog.getResult() != null){
+            if (result.get().getClass().equals(String.class) && result.get() != ""){
+                myViewModel.saveMaze(result.get());
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Maze saved");
+                alert.setContentText("Maze successfully saved");
+                alert.setGraphic(null);
+                alert.setHeaderText("");
+                alert.show();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Wrong input");
+                alert.setContentText("Please enter a valid name");
+                alert.show();
+            }
         }
+
+
+
     }
 
     public void keyPressed(KeyEvent keyEvent) {
@@ -253,8 +274,8 @@ public class MazeWindowController implements Initializable, Observer {
                 setPlayerPosition(myViewModel.getMaze().getStartPosition().getRowIndex(),myViewModel.getMaze().getStartPosition().getColumnIndex());
                 myViewModel.setPlayerRow(myViewModel.getMaze().getStartPosition().getRowIndex());
                 myViewModel.setPlayerCol(myViewModel.getMaze().getStartPosition().getColumnIndex());
+                playMusic();
             }
-            alert.show();
         }
     }
 
