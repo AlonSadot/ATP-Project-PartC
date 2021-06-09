@@ -255,29 +255,6 @@ public class MazeDisplay extends Canvas {
         x = maze.getGoalPosition().getColumnIndex()*cellWidth;
         y = maze.getGoalPosition().getRowIndex()*cellHeight;
         graphicsContext.drawImage(goalPoint,x,y,cellWidth,cellHeight);
-        if (playerRow == maze.getGoalPosition().getRowIndex() && playerCol == maze.getGoalPosition().getColumnIndex()){
-            MazeWindowController.goalReached();
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("You have won !");
-            alert.setHeaderText("");
-            alert.setContentText("");
-            Image image = new Image("/images/youWin.jpg");
-            ImageView imageView = new ImageView(image);
-            alert.setGraphic(imageView);
-            ButtonType buttonTypeOne = new ButtonType("Back to main menu");
-            ButtonType buttonTypeTwo = new ButtonType("Restart maze");
-            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonTypeOne){
-
-            }
-            else {
-
-            }
-            alert.show();
-        }
 
     }
 

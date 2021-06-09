@@ -13,7 +13,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -87,7 +90,8 @@ public class MazeWindowController implements Initializable, Observer {
     }
 
     public static void goalReached()
-    {   mediaPlayer.stop();
+    {
+        mediaPlayer.stop();
         Media mediaMusic = new Media(Paths.get("./resources/music/GoalReached.mp3").toUri().toString());
         mediaPlayer = new MediaPlayer(mediaMusic);
         mediaPlayer.setCycleCount(1);
@@ -125,6 +129,34 @@ public class MazeWindowController implements Initializable, Observer {
     public void keyPressed(KeyEvent keyEvent) {
         myViewModel.movePlayer(keyEvent);
         keyEvent.consume();
+
+        if (myViewModel.getPlayerRow() == myViewModel.getMaze().getGoalPosition().getRowIndex() && myViewModel.getPlayerCol() == myViewModel.getMaze().getGoalPosition().getColumnIndex()){
+            goalReached();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("You have won !");
+            alert.setHeaderText("");
+            alert.setContentText("");
+            Image image = new Image("/images/youWin.jpg");
+            ImageView imageView = new ImageView(image);
+            alert.setGraphic(imageView);
+            ButtonType returnButton = new ButtonType("Back to main menu");
+            ButtonType restartButton = new ButtonType("Restart maze");
+            alert.getButtonTypes().setAll(returnButton, restartButton);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == returnButton){
+                try {
+                    returnBack(null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+
+            }
+            alert.show();
+        }
     }
 
     public void setPlayerPosition(int row, int col){
@@ -230,6 +262,7 @@ public class MazeWindowController implements Initializable, Observer {
         myViewModel = new MyViewModel(model);
         setMazeViewModel(myViewModel);
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
