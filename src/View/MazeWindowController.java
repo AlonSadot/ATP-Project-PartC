@@ -26,6 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -45,7 +46,6 @@ public class MazeWindowController implements Initializable, Observer {
     public Pane main_pane;
     public Button backButton;
     public static double x,y;
-
 
 
     public static void setMazeType(boolean state) {
@@ -85,45 +85,59 @@ public class MazeWindowController implements Initializable, Observer {
     public void mouseDragged(MouseEvent event){
         double tempx = event.getSceneX();
         double tempy = event.getSceneY();
-        if (tempx < x && tempy == y) {
-            System.out.println("went left");
-            x=tempx;
-            y=tempy;
-        }
-        if (tempx > x && tempy == y) {
-            System.out.println("went right");
-            x=tempx;
-            y=tempy;
-        }
-        if (tempx == x && tempy > y) {
-            System.out.println("went down");
-            x=tempx;
-            y=tempy;
-        }
-        if (tempx == x && tempy < y) {
-            System.out.println("went up");
-            x=tempx;
-            y=tempy;
-        }
-        if (tempx < x && tempy < y) {
-            System.out.println("went left down");
-            x=tempx;
-            y=tempy;
-        }
-        if (tempx < x && tempy > y) {
-            System.out.println("went left up");
-            x=tempx;
-            y=tempy;
-        }
-        if (tempx > x && tempy > y) {
-            System.out.println("went right up");
-            x=tempx;
-            y=tempy;
-        }
-        if (tempx < x && tempy < y) {
-            System.out.println("went right down");
-            x=tempx;
-            y=tempy;
+        try {
+            Robot r = new Robot();
+
+            if (tempx < x && tempy == y) {
+                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD4);
+                System.out.println("went left");
+                x=tempx;
+                y=tempy;
+            }
+             if (tempx > x && tempy == y) {
+                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD6);
+                System.out.println("went right");
+                x=tempx;
+                y=tempy;
+            }
+             if (tempx == x && tempy > y) {
+                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD2);
+                System.out.println("went down");
+                x=tempx;
+                y=tempy;
+            }
+             if (tempx == x && tempy < y) {
+                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD8);
+                System.out.println("went up");
+                x=tempx;
+                y=tempy;
+            }
+             if (tempx < x && tempy < y) {
+                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD1);
+                System.out.println("went left down");
+                x=tempx;
+                y=tempy;
+            }
+             if (tempx < x && tempy > y) {
+                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD7);
+                System.out.println("went left up");
+                x=tempx;
+                y=tempy;
+            }
+             if (tempx > x && tempy > y) {
+                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD9);
+                System.out.println("went right up");
+                x=tempx;
+                y=tempy;
+            }
+             if (tempx < x && tempy < y) {
+                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD3);
+                System.out.println("went right down");
+                x=tempx;
+                y=tempy;
+            }
+
+        } catch (AWTException e) {
         }
     }
 //    public void mouseDragged(MouseDragEvent e) {
@@ -200,7 +214,14 @@ public class MazeWindowController implements Initializable, Observer {
         textInputDialog.setContentText("Please enter the saved maze name:");
         Optional<String> result = textInputDialog.showAndWait();
 //        String pepe = "Sturgian Fian Champion 260 bow skill";
-        myViewModel.saveMaze(result.get());
+        if (result.get() != null)
+            myViewModel.saveMaze(result.get());
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wrong input");
+            alert.setContentText("Please enter a valid name");
+            alert.show();
+        }
     }
 
     public void keyPressed(KeyEvent keyEvent) {
@@ -209,7 +230,6 @@ public class MazeWindowController implements Initializable, Observer {
 
         if (myViewModel.getPlayerRow() == myViewModel.getMaze().getGoalPosition().getRowIndex() && myViewModel.getPlayerCol() == myViewModel.getMaze().getGoalPosition().getColumnIndex()){
             goalReached();
-
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("You have won !");
             alert.setHeaderText("");
@@ -230,7 +250,9 @@ public class MazeWindowController implements Initializable, Observer {
                 }
             }
             else {
-
+                setPlayerPosition(myViewModel.getMaze().getStartPosition().getRowIndex(),myViewModel.getMaze().getStartPosition().getColumnIndex());
+                myViewModel.setPlayerRow(myViewModel.getMaze().getStartPosition().getRowIndex());
+                myViewModel.setPlayerCol(myViewModel.getMaze().getStartPosition().getColumnIndex());
             }
             alert.show();
         }

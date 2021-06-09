@@ -19,6 +19,14 @@ public class MyViewModel extends Observable implements Observer {
         this.model.assignObserver(this);
     }
 
+    public void setPlayerRow(int r){
+        this.model.setPlayerRow(r);
+    }
+
+    public void setPlayerCol(int c){
+        this.model.setPlayerCol(c);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         setChanged();

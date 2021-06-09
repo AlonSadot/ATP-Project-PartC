@@ -26,6 +26,14 @@ public class MyModel extends Observable implements IModel{
     private int playerCol;
     private Solution solution;
 
+    public void setPlayerRow(int playerRow) {
+        this.playerRow = playerRow;
+    }
+
+    public void setPlayerCol(int playerCol) {
+        this.playerCol = playerCol;
+    }
+
     @Override
     public void generateMaze(int rows, int cols) {
         try {
