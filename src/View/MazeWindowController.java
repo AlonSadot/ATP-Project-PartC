@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -25,6 +26,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
@@ -71,6 +73,10 @@ public class MazeWindowController implements Initializable, Observer {
 
     public void returnBack(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
+        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+//        currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        currStage.setScene(root);
+//        currStage.show();
         mediaPlayer.stop();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         backButton.getScene().setRoot(root2);
@@ -83,90 +89,43 @@ public class MazeWindowController implements Initializable, Observer {
     }
 
     public void mouseDragged(MouseEvent event){
-        double tempx = event.getSceneX();
-        double tempy = event.getSceneY();
+        double deltaX = ((event.getX() - mazeDisplay.getCellWidth()/2)/mazeDisplay.getCellWidth())-myViewModel.getPlayerCol();
+        double deltaY = ((event.getY() - mazeDisplay.getCellHeight()/2)/mazeDisplay.getCellHeight())-myViewModel.getPlayerRow();
+
+        int rowDelta = (int)Math.round(deltaY);
+        int colDelta = (int)Math.round(deltaX);
+        System.out.println(rowDelta);
+
         try {
             Robot r = new Robot();
-
-            if (tempx < x && tempy == y) {
-                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD4);
-                System.out.println("went left");
-                x=tempx;
-                y=tempy;
+            if (rowDelta == 0 && colDelta !=0) {
+                if (colDelta<0)
+                    r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD4);
+                else if (colDelta>0)
+                    r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD6);
             }
-             if (tempx > x && tempy == y) {
-                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD6);
-                System.out.println("went right");
-                x=tempx;
-                y=tempy;
+            else if (rowDelta != 0 && colDelta == 0) {
+                 if (rowDelta<0)
+                     r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD8);
+                 else if (rowDelta>0)
+                     r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD2);
             }
-             if (tempx == x && tempy > y) {
-                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD2);
-                System.out.println("went down");
-                x=tempx;
-                y=tempy;
+            else if (rowDelta == 1 && colDelta == 1) {
+                    r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD3);
             }
-             if (tempx == x && tempy < y) {
-                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD8);
-                System.out.println("went up");
-                x=tempx;
-                y=tempy;
-            }
-             if (tempx < x && tempy < y) {
+            else if (rowDelta == 1 && colDelta == -1) {
                 r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD1);
-                System.out.println("went left down");
-                x=tempx;
-                y=tempy;
             }
-             if (tempx < x && tempy > y) {
+            else if (rowDelta == -1 && colDelta == -1) {
                 r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD7);
-                System.out.println("went left up");
-                x=tempx;
-                y=tempy;
             }
-             if (tempx > x && tempy > y) {
+            else if (rowDelta == -1 && colDelta == 1) {
                 r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD9);
-                System.out.println("went right up");
-                x=tempx;
-                y=tempy;
-            }
-             if (tempx < x && tempy < y) {
-                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD3);
-                System.out.println("went right down");
-                x=tempx;
-                y=tempy;
             }
 
         } catch (AWTException e) {
         }
     }
-//    public void mouseDragged(MouseDragEvent e) {
-//
-//        int y = e.getY();
-//        if (y < previousY) {
-//            System.out.println("UP");
-//        } else if (y > previousY) {
-//            System.out.println("DOWN");
-//        }
-//
-//        previousY = y;
-//    }
-
-//    public void dragHandle(MouseEvent event) {
-//        if(!event.isPrimaryButtonDown())
-//            return;
-//        double x,y,tx,ty;
-//        x=event.getSceneX();
-//        y=event.getSceneY();
-//        Node node = (Node)event.getSource();
-//        tx=node.getTranslateX();
-//        ty = node.getTranslateY();
-//        double scale = getScale();
-//        node.setTranslateX(tx+((event.getSceneX()-x)/scale));
-//        node.setTranslateY(ty+((event.getSceneY()-y)/scale));
-//        event.consume();
-//    }
-
         public void setMazeViewModel(MyViewModel myViewModel) {
         this.myViewModel = myViewModel;
         this.myViewModel.addObserver(this);
@@ -312,8 +271,8 @@ public class MazeWindowController implements Initializable, Observer {
     }
 
     public void setCenterPivot(){
-        main_pane.setTranslateX(main_pane.getTranslateX()/50);
-        main_pane.setTranslateY(main_pane.getTranslateY()/50);
+        main_pane.setTranslateX(main_pane.getTranslateX()/20);
+        main_pane.setTranslateY(main_pane.getTranslateY()/20);
     }
 
     public double getScale() {
@@ -327,7 +286,7 @@ public class MazeWindowController implements Initializable, Observer {
     public void zoomHandle(ScrollEvent event) {
         if(event.isControlDown()) {
             boolean flag = false;
-            double delta = 1.2;
+            double delta = 1.1;
 
             double scale = getScale();
             double oldScale = scale;

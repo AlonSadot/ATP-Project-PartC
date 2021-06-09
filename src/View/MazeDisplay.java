@@ -35,7 +35,7 @@ public class MazeDisplay extends Canvas {
     String picturePath = "file:./resources/images/DragonDown.png";
     public static int DragonColor = 1;
     public static MediaPlayer mediaPlayer;
-
+    private double cellHeight,cellWidth;
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
     public static boolean mazeType = true;
@@ -185,7 +185,13 @@ public class MazeDisplay extends Canvas {
         System.out.println("drawing solution...");
     }
 
+    public double getCellHeight() {
+        return cellHeight;
+    }
 
+    public double getCellWidth() {
+        return cellWidth;
+    }
 
     private void draw() {
         if(maze != null){
@@ -195,8 +201,8 @@ public class MazeDisplay extends Canvas {
             int rows = mazeBody.length;
             int cols = mazeBody[0].length;
 
-            double cellHeight = canvasHeight / rows;
-            double cellWidth = canvasWidth / cols;
+            cellHeight = canvasHeight / rows;
+            cellWidth = canvasWidth / cols;
 
             GraphicsContext graphicsContext = getGraphicsContext2D();
             //clear the canvas:
