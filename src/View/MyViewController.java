@@ -1,27 +1,21 @@
 package View;
 
 
-
 import ViewModel.MyViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Observable;
@@ -54,8 +48,6 @@ public class MyViewController implements IView, Initializable, Observer {
     }
 
     public static void mouseAudio(){
-
-
         Media mouseClicked = new Media((Paths.get("./resources/music/Click.mp3").toUri().toString()));
         MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
         mediaPlayer2.setCycleCount(1);
@@ -92,8 +84,6 @@ public class MyViewController implements IView, Initializable, Observer {
 
     public void buttonLoad(ActionEvent event) throws IOException {
         mouseAudio();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoadWindow.fxml"));
-        fxmlLoader.load();
         Parent root2 = FXMLLoader.load(getClass().getResource("LoadWindow.fxml"));
         Start_button.getScene().setRoot(root2);
     }

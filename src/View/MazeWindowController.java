@@ -10,6 +10,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -44,6 +46,7 @@ public class MazeWindowController implements Initializable, Observer {
     public Button backButton;
 
 
+
     public static void setMazeType(boolean state) {
         MazeWindowController.mazeType = state;
     }
@@ -65,18 +68,45 @@ public class MazeWindowController implements Initializable, Observer {
         MazeWindowController.mazeCols = mazeCols;
     }
 
-
-
     public void returnBack(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MiddleScene.fxml"));
-        fxmlLoader.load();
         mediaPlayer.stop();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         backButton.getScene().setRoot(root2);
     }
 
-    public void setMazeViewModel(MyViewModel myViewModel) {
+
+    public void mouseDragged(MouseDragEvent event){
+
+    }
+//    public void mouseDragged(MouseDragEvent e) {
+//
+//        int y = e.getY();
+//        if (y < previousY) {
+//            System.out.println("UP");
+//        } else if (y > previousY) {
+//            System.out.println("DOWN");
+//        }
+//
+//        previousY = y;
+//    }
+
+//    public void dragHandle(MouseEvent event) {
+//        if(!event.isPrimaryButtonDown())
+//            return;
+//        double x,y,tx,ty;
+//        x=event.getSceneX();
+//        y=event.getSceneY();
+//        Node node = (Node)event.getSource();
+//        tx=node.getTranslateX();
+//        ty = node.getTranslateY();
+//        double scale = getScale();
+//        node.setTranslateX(tx+((event.getSceneX()-x)/scale));
+//        node.setTranslateY(ty+((event.getSceneY()-y)/scale));
+//        event.consume();
+//    }
+
+        public void setMazeViewModel(MyViewModel myViewModel) {
         this.myViewModel = myViewModel;
         this.myViewModel.addObserver(this);
     }
@@ -204,7 +234,7 @@ public class MazeWindowController implements Initializable, Observer {
         myScale.set(scale);
     }
 
-    public void ZoomHandle(ScrollEvent event) {
+    public void zoomHandle(ScrollEvent event) {
         if(event.isControlDown()) {
             boolean flag = false;
             double delta = 1.2;

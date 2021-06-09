@@ -8,7 +8,7 @@
 <!--<?import View.*?>-->
 <?import View.*?>
 
-<AnchorPane fx:id="main_pane" onMouseClicked="#mouseClicked" onScroll="#ZoomHandle" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeWindowController">
+<AnchorPane fx:id="main_pane" onMouseClicked="#mouseClicked" onScroll="#zoomHandle" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MazeWindowController">
   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <HBox prefHeight="36.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

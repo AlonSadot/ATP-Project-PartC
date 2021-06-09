@@ -1,6 +1,5 @@
 package View;
 
-import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,10 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javafx.scene.image.ImageView;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
@@ -25,8 +25,9 @@ public class LoadWindowController  implements Initializable, Observer {
     public Stage currStage;
     public ListView listView;
     public Label errorLabel;
-    public MyViewModel myViewModel;
+    public AnchorPane main_pane;
     public Button loadButton;
+    public ImageView mainImageView;
 
     public void backToMenu(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
@@ -70,6 +71,8 @@ public class LoadWindowController  implements Initializable, Observer {
         for ( File f : contents) {
             listView.getItems().add(f.getPath().substring(12));
         }
+        mainImageView.fitWidthProperty().bind(main_pane.widthProperty());
+        mainImageView.fitHeightProperty().bind(main_pane.heightProperty());
 
     }
 }
