@@ -123,6 +123,7 @@ public class MazeDisplay extends Canvas {
 
     public void setSolution(Solution solution){
         this.solution = solution;
+        draw();
     }
 
     public int getPlayerCol(){
