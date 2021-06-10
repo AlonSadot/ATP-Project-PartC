@@ -42,7 +42,6 @@ public class MyViewController implements IView, Initializable, Observer {
 
     public static void music() {
         if (isMusic()){
-            System.out.println("brooooooo");
             playing = true;
             Media mediaMusic = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
             mediaPlayer = new MediaPlayer(mediaMusic);
