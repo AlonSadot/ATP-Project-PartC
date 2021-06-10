@@ -29,9 +29,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        config.setProperty("threadPoolSize","7");
-        config.setProperty("mazeGeneratingAlgorithm","bobo");
-        config.setProperty("mazeSearchingAlgorithm","DFS");
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
 

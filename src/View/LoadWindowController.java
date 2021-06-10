@@ -67,7 +67,6 @@ public class LoadWindowController  implements Initializable, Observer {
         File directory = new File("Saved_Mazes");
         File[] contents = directory.listFiles();
 
-
         for ( File f : contents) {
             listView.getItems().add(f.getPath().substring(12));
         }

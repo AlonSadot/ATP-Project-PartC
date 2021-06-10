@@ -237,11 +237,9 @@ public class MazeDisplay extends Canvas {
         } catch (FileNotFoundException e) {
             System.out.println("There is no wall image file");
         }
-
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if(mazeBody[i][j] == 1){
-                    //if it is a wall:
                     double x = j * cellWidth;
                     double y = i * cellHeight;
                     if(wallImage == null) {
@@ -252,8 +250,8 @@ public class MazeDisplay extends Canvas {
                 }
             }
         }
-        Image startingPoint = new Image("file:./resources/images/GreenPort.png");
-        Image goalPoint = new Image("file:./resources/images/PurpPort.png");
+        Image startingPoint = new Image("file:./resources/images/BluePort.png");
+        Image goalPoint = new Image("file:./resources/images/DragonEgg.png");
         double x,y;
         x = maze.getStartPosition().getColumnIndex()*cellWidth;
         y = maze.getStartPosition().getRowIndex()*cellHeight;

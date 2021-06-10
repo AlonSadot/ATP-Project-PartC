@@ -48,13 +48,13 @@
                         <RowConstraints maxHeight="5000.0" minHeight="10.0" prefHeight="5000.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <TextField fx:id="RowText" prefHeight="5000.0" prefWidth="5000.0" GridPane.columnIndex="1" />
-                        <TextField fx:id="ColText" prefHeight="5000.0" prefWidth="5000.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label prefHeight="5000.0" prefWidth="5000.0" text="Row Number : ">
+                        <TextField fx:id="RowText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="116.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="ColText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="116.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label prefHeight="33.0" prefWidth="161.0" text="Row Number : ">
                      <font>
                         <Font name="Bauhaus 93" size="20.0" />
                      </font></Label>
-                  <Label prefHeight="5000.0" prefWidth="5000.0" text="Column Number :" GridPane.rowIndex="1">
+                  <Label prefHeight="33.0" prefWidth="161.0" text="Column Number :" GridPane.rowIndex="1">
                      <font>
                         <Font name="Bauhaus 93" size="20.0" />
                      </font></Label>

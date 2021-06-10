@@ -21,6 +21,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import static View.OptionsWindowController.isMusic;
+
 public class MiddleSceneController implements Initializable, Observer {
     public Stage currStage;
 
@@ -99,7 +101,7 @@ public class MiddleSceneController implements Initializable, Observer {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!MyViewController.playing)
-            MyViewController.music();
+                MyViewController.music();
         Configurations config = Configurations.getInstance();
         config.setProperty("threadPoolSize","7");
         config.setProperty("mazeGeneratingAlgorithm","MyGenerator");

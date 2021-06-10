@@ -37,6 +37,9 @@ import java.util.Observer;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static View.OptionsWindowController.isMusic;
+import static View.OptionsWindowController.musicChecked;
+
 public class MazeWindowController implements Initializable, Observer {
     public static int mazeRows;
     public static int mazeCols;
@@ -74,10 +77,8 @@ public class MazeWindowController implements Initializable, Observer {
     public void returnBack(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
         Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
-//        currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        currStage.setScene(root);
-//        currStage.show();
-        mediaPlayer.stop();
+        if (musicChecked)
+            mediaPlayer.stop();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
         backButton.getScene().setRoot(root2);
     }
@@ -141,20 +142,24 @@ public class MazeWindowController implements Initializable, Observer {
 
     public static void goalReached()
     {
-        mediaPlayer.stop();
-        Media mediaMusic = new Media(Paths.get("./resources/music/GoalReached.mp3").toUri().toString());
-        mediaPlayer = new MediaPlayer(mediaMusic);
-        mediaPlayer.setCycleCount(1);
-        mediaPlayer.play();
-        mediaPlayer.setVolume(0.3);
+        if (isMusic()){
+            mediaPlayer.stop();
+            Media mediaMusic = new Media(Paths.get("./resources/music/GoalReached.mp3").toUri().toString());
+            mediaPlayer = new MediaPlayer(mediaMusic);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+            mediaPlayer.setVolume(0.3);
+        }
     }
 
     public static void playMusic(){
-        Media mediaMusic = new Media(Paths.get("./resources/music/MazeTravel.mp3").toUri().toString());
-        mediaPlayer = new MediaPlayer(mediaMusic);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.play();
-        mediaPlayer.setVolume(0.15);
+        if (isMusic()){
+            Media mediaMusic = new Media(Paths.get("./resources/music/MazeTravel.mp3").toUri().toString());
+            mediaPlayer = new MediaPlayer(mediaMusic);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.play();
+            mediaPlayer.setVolume(0.15);
+        }
     }
 
     public void solveMaze(ActionEvent actionEvent) {
@@ -168,7 +173,7 @@ public class MazeWindowController implements Initializable, Observer {
     public void helpButton(ActionEvent actionEvent){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Help");
-        alert.setContentText("The goal of the game is to get the dragon to the purple portal. \n" +
+        alert.setContentText("The goal of the game is to get your dragon back to his egg. \n" +
                 "you can move your dragon by using the numpad numbers or by dragging your dragon on screen");
         alert.setGraphic(null);
         alert.setHeaderText("");

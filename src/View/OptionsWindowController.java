@@ -1,6 +1,7 @@
 package View;
 
 import Server.Configurations;
+import algorithms.mazeGenerators.MyMazeGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,8 +31,13 @@ public class OptionsWindowController implements Initializable, Observer {
     public ImageView mainImageView;
     public RadioButton Type1,Type2,Type3,Alg1,Alg2,Alg3;
     public TextField poolSize;
+
+    public static boolean musicChecked = true;
     public CheckBox sKey;
 
+    public static boolean isMusic(){
+        return musicChecked;
+    }
 
     public void backToMenu(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
@@ -41,14 +47,15 @@ public class OptionsWindowController implements Initializable, Observer {
         currStage.show();
     }
 
-    public void ApplyButton(ActionEvent event){
+    public void ApplyButton(ActionEvent event) throws IOException {
+        MyViewController.mouseAudio();
         Configurations config = Configurations.getInstance();
         if (isNumeric(poolSize.getText()) && Integer.parseInt(poolSize.getText()) >= 0)
             config.setProperty("threadPoolSize",poolSize.getText());
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Threadpool invalid input value");
-            alert.setContentText("Please enter a whole number above 0 in the text fields");
+            alert.setTitle("invalid Threadpool input");
+            alert.setContentText("Please enter a whole number above 0 in the text field");
             alert.setGraphic(null);
             alert.setHeaderText("");
             alert.show();
@@ -60,6 +67,7 @@ public class OptionsWindowController implements Initializable, Observer {
             config.setProperty("mazeGeneratingAlgorithm","Simple");
         else
             config.setProperty("mazeGeneratingAlgorithm","Empty");
+
         if (Alg1.isSelected())
             config.setProperty("mazeSearchingAlgorithm","BFS");
         else if (Alg2.isSelected())
@@ -67,9 +75,21 @@ public class OptionsWindowController implements Initializable, Observer {
         else
             config.setProperty("mazeSearchingAlgorithm","Best");
 
+        if (sKey.isSelected()){
+            musicChecked = true;
+            if (!MyViewController.playing)
+                MyViewController.music();
+        }
+        else{
+            MyViewController.mediaPlayer.stop();
+            musicChecked = false;
+            MyViewController.playing = false;
+        }
 
-
-
+        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currStage.setScene(root);
+        currStage.show();
     }
 
 
@@ -80,6 +100,33 @@ public class OptionsWindowController implements Initializable, Observer {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Configurations config = Configurations.getInstance();
+
+        String type = config.getProperty("mazeGeneratingAlgorithm");
+        if (type.equals("MyGenerator")){
+            Type1.setSelected(true);
+        }
+        else if(type.equals("Simple"))
+            Type2.setSelected(true);
+        else
+            Type3.setSelected(true);
+
+        String algo = config.getProperty("mazeSearchingAlgorithm");
+        if (algo.equals("BFS"))
+            Alg1.setSelected(true);
+        else if (algo.equals("DFS"))
+            Alg2.setSelected(true);
+        else
+            Alg3.setSelected(true);
+
+        String poolNum = config.getProperty("threadPoolSize");
+        poolSize.setText(poolNum);
+
+        if (musicChecked == true)
+            sKey.setSelected(true);
+        else
+            sKey.setSelected(false);
+
         mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
         mainImageView.fitHeightProperty().bind(mainPane.heightProperty());
     }

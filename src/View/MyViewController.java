@@ -22,6 +22,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
+import static View.OptionsWindowController.isMusic;
+
 
 public class MyViewController implements IView, Initializable, Observer {
 
@@ -39,20 +41,26 @@ public class MyViewController implements IView, Initializable, Observer {
     StringProperty updatePlayerCol = new SimpleStringProperty();
 
     public static void music() {
-        playing = true;
-        Media mediaMusic = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
-        mediaPlayer = new MediaPlayer(mediaMusic);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.play();
-        mediaPlayer.setVolume(0.3);
+        if (isMusic()){
+            System.out.println("brooooooo");
+            playing = true;
+            Media mediaMusic = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
+            mediaPlayer = new MediaPlayer(mediaMusic);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.play();
+            mediaPlayer.setVolume(0.3);
+        }
+
     }
 
     public static void mouseAudio(){
-        Media mouseClicked = new Media((Paths.get("./resources/music/Click.mp3").toUri().toString()));
-        MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
-        mediaPlayer2.setCycleCount(1);
-        mediaPlayer2.play();
-        mediaPlayer2.setVolume(0.3);
+        if (isMusic()){
+            Media mouseClicked = new Media((Paths.get("./resources/music/Click.mp3").toUri().toString()));
+            MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
+            mediaPlayer2.setCycleCount(1);
+            mediaPlayer2.play();
+            mediaPlayer2.setVolume(0.3);
+        }
     }
 
 
@@ -110,7 +118,7 @@ public class MyViewController implements IView, Initializable, Observer {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (mediaPlayer != null) {
             if (!playing)
-                MyViewController.music();
+                music();
         }
         mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
         mainImageView.fitHeightProperty().bind(mainPane.heightProperty());
