@@ -51,12 +51,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <CheckBox mnemonicParsing="false" selected="true" text="On" GridPane.rowIndex="2">
+                  <CheckBox fx:id="sKey" mnemonicParsing="false" selected="true" text="On" GridPane.rowIndex="2">
                      <font>
                         <Font name="Elephant Italic" size="13.0" />
                      </font>
                   </CheckBox>
-                  <RadioButton mnemonicParsing="false" selected="true" text="BreadthFirstSearch" GridPane.rowIndex="1">
+                  <RadioButton fx:id="Alg1" mnemonicParsing="false" selected="true" text="BreadthFirstSearch" GridPane.rowIndex="1">
                      <font>
                         <Font name="Elephant Italic" size="14.0" />
                      </font>
@@ -64,17 +64,17 @@
                         <ToggleGroup fx:id="Group2" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="BestFirstSearch" toggleGroup="$Group2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <RadioButton fx:id="Alg3" mnemonicParsing="false" text="BestFirstSearch" toggleGroup="$Group2" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="Elephant Italic" size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" text="DepthFirstSearch" toggleGroup="$Group2" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <RadioButton fx:id="Alg2" mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" text="DepthFirstSearch" toggleGroup="$Group2" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Elephant Italic" size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" selected="true" text="Normal">
+                  <RadioButton fx:id="Type1" mnemonicParsing="false" selected="true" text="Normal">
                      <font>
                         <Font name="Elephant Italic" size="14.0" />
                      </font>
@@ -82,12 +82,12 @@
                         <ToggleGroup fx:id="Group1" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Empty" toggleGroup="$Group1" GridPane.columnIndex="2">
+                  <RadioButton fx:id="Type3" mnemonicParsing="false" text="Empty" toggleGroup="$Group1" GridPane.columnIndex="2">
                      <font>
                         <Font name="Elephant Italic" size="14.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" text="Simple" toggleGroup="$Group1" GridPane.columnIndex="1">
+                  <RadioButton fx:id="Type2" mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" text="Simple" toggleGroup="$Group1" GridPane.columnIndex="1">
                      <font>
                         <Font name="Elephant Italic" size="14.0" />
                      </font>
@@ -153,14 +153,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="102.0" text="7" GridPane.rowIndex="2">
+                  <TextField fx:id="poolSize" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="102.0" text="7" GridPane.rowIndex="2">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </TextField>
                </children>
             </GridPane>
-            <Button fx:id="backButton1" mnemonicParsing="false" onAction="#backToMenu" prefHeight="78.0" prefWidth="157.0" text="Apply" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button fx:id="applyButton" mnemonicParsing="false" onAction="#backToMenu" prefHeight="78.0" prefWidth="157.0" text="Apply" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
