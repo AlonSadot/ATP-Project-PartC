@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.image.Image?>
+<!--<?import javafx.scene.image.Image?>-->
 
 <AnchorPane fx:id="mainPane" prefHeight="592.0" prefWidth="830.0" stylesheets="@LoadWindowCSS.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OptionsWindowController">
     <children>
         <ImageView fx:id="mainImageView" fitHeight="592.0" fitWidth="830.0" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <image>
-                <Image url="/images/BackgroundGif.gif"/>
+<!--                <Image url="/images/BackgroundGif.gif"/>-->
             </image>
         </ImageView>
         <GridPane prefHeight="592.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -50,19 +50,21 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <MenuButton mnemonicParsing="false" text="MenuButton">
+                  <MenuButton mnemonicParsing="false" text="Choose Type:">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                      <MenuItem mnemonicParsing="false" text="Normal" />
+                        <MenuItem mnemonicParsing="false" text="Simple" />
+                        <MenuItem mnemonicParsing="false" text="Empty" />
                     </items>
                   </MenuButton>
-                  <MenuButton mnemonicParsing="false" text="MenuButton" GridPane.rowIndex="1">
+                  <MenuButton mnemonicParsing="false" text="Choose Algorithm:" GridPane.rowIndex="1">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                        <MenuItem mnemonicParsing="false" text="BreadthFirstSearch" />
+                        <MenuItem mnemonicParsing="false" text="DepthFirstSearch" />
+                        <MenuItem mnemonicParsing="false" text="BestFirstSearch" />
                      </items>
                   </MenuButton>
-                  <CheckBox mnemonicParsing="false" text="On" GridPane.rowIndex="2">
+                  <CheckBox mnemonicParsing="false" selected="true" text="On" GridPane.rowIndex="2">
                      <font>
                         <Font name="Elephant Italic" size="13.0" />
                      </font>
@@ -126,7 +128,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="102.0" GridPane.rowIndex="2">
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="102.0" text="7" GridPane.rowIndex="2">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
