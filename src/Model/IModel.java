@@ -16,6 +16,6 @@ public interface IModel {
     void assignObserver(Observer o);
     void saveMaze(String name);
     void loadMaze(String mazeName);
-    public void setPlayerCol(int playerCol);
-    public void setPlayerRow(int playerRow);
+    void setPlayerCol(int playerCol);
+    void setPlayerRow(int playerRow);
 }

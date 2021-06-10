@@ -49,6 +49,7 @@ public class MazeWindowController implements Initializable, Observer {
     public MyViewModel myViewModel;
     public MazeDisplay mazeDisplay = new MazeDisplay();
     public Pane main_pane;
+    public ImageView mainImageView;
     public Button backButton;
     public static double x,y;
 
@@ -76,11 +77,12 @@ public class MazeWindowController implements Initializable, Observer {
 
     public void returnBack(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
-        Parent root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
         if (musicChecked)
             mediaPlayer.stop();
-        Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
-        backButton.getScene().setRoot(root);
+        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        Stage currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currStage.setScene(root);
+        currStage.show();
     }
 
 
@@ -95,7 +97,6 @@ public class MazeWindowController implements Initializable, Observer {
 
         int rowDelta = (int)Math.round(deltaY);
         int colDelta = (int)Math.round(deltaX);
-        System.out.println(rowDelta);
 
         try {
             Robot r = new Robot();
@@ -177,6 +178,7 @@ public class MazeWindowController implements Initializable, Observer {
                 "you can move your dragon by using the numpad numbers or by dragging your dragon on screen");
         alert.setGraphic(null);
         alert.setHeaderText("");
+        alert.setHeight(200);
         alert.show();
     }
 
@@ -364,6 +366,8 @@ public class MazeWindowController implements Initializable, Observer {
         }
         main_pane.scaleXProperty().bind(myScale);
         main_pane.scaleYProperty().bind(myScale);
+        mainImageView.fitWidthProperty().bind(main_pane.widthProperty());
+        mainImageView.fitHeightProperty().bind(main_pane.heightProperty());
         playMusic();
     }
 
