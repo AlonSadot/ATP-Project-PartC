@@ -1,11 +1,8 @@
 package View;
 
-import Model.IModel;
-import Model.MyModel;
-import Server.Server;
+import Server.*;
 import Server.ServerStrategyGenerateMaze;
 import Server.ServerStrategySolveSearchProblem;
-import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,7 +17,6 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MyView.fxml"));
         fxmlLoader.load();
 
-
         if (MyViewController.mediaPlayer != null)
             playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
         if (!playing)
@@ -30,12 +26,12 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
     }
 
     public static void main(String[] args) {
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+
         solveSearchProblemServer.start();
         mazeGeneratingServer.start();
         launch(args);

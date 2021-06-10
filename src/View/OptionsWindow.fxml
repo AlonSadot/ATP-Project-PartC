@@ -2,8 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,6 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.image.Image?>
+
 <AnchorPane fx:id="mainPane" prefHeight="592.0" prefWidth="830.0" stylesheets="@LoadWindowCSS.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.OptionsWindowController">
     <children>
         <ImageView fx:id="mainImageView" fitHeight="592.0" fitWidth="830.0" pickOnBounds="true" preserveRatio="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -35,14 +39,100 @@
                         <Insets />
                     </GridPane.margin>
                 </Button>
-                <Label fx:id="errorLabel" prefHeight="42.0" prefWidth="322.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <font>
-                        <Font name="Poor Richard" size="25.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="150.0" />
-                    </GridPane.margin>
-                </Label>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <MenuButton mnemonicParsing="false" text="MenuButton">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" text="MenuButton" GridPane.rowIndex="1">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                  </MenuButton>
+                  <CheckBox mnemonicParsing="false" text="On" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Elephant Italic" size="13.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </GridPane>
+            <GridPane GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="38.0" prefWidth="206.0" text="Maze Type:" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Elephant Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="38.0" prefWidth="207.0" text="Solution Algorithm:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Elephant Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="38.0" prefWidth="207.0" text="Sound:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Elephant Italic" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="38.0" prefWidth="201.0" text="Threadpool Size:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Elephant Italic" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="102.0" GridPane.rowIndex="2">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+               </children>
+            </GridPane>
             </children>
         </GridPane>
     </children>
