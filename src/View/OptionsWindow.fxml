@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -25,8 +25,8 @@
         </ImageView>
         <GridPane prefHeight="592.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="5000.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="5000.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="338.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="492.0" minWidth="10.0" prefWidth="492.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="5000.0" vgrow="SOMETIMES" />
@@ -41,8 +41,9 @@
                 </Button>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="172.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="162.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="158.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -50,30 +51,53 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <MenuButton mnemonicParsing="false" text="Choose Type:">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Normal" />
-                        <MenuItem mnemonicParsing="false" text="Simple" />
-                        <MenuItem mnemonicParsing="false" text="Empty" />
-                    </items>
-                  </MenuButton>
-                  <MenuButton mnemonicParsing="false" text="Choose Algorithm:" GridPane.rowIndex="1">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="BreadthFirstSearch" />
-                        <MenuItem mnemonicParsing="false" text="DepthFirstSearch" />
-                        <MenuItem mnemonicParsing="false" text="BestFirstSearch" />
-                     </items>
-                  </MenuButton>
                   <CheckBox mnemonicParsing="false" selected="true" text="On" GridPane.rowIndex="2">
                      <font>
                         <Font name="Elephant Italic" size="13.0" />
                      </font>
                   </CheckBox>
+                  <RadioButton mnemonicParsing="false" selected="true" text="BreadthFirstSearch" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Elephant Italic" size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Group2" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="BestFirstSearch" toggleGroup="$Group2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Elephant Italic" size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" text="DepthFirstSearch" toggleGroup="$Group2" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Elephant Italic" size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" selected="true" text="Normal">
+                     <font>
+                        <Font name="Elephant Italic" size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Group1" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Empty" toggleGroup="$Group1" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Elephant Italic" size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="20.0" prefWidth="160.0" text="Simple" toggleGroup="$Group1" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Elephant Italic" size="14.0" />
+                     </font>
+                  </RadioButton>
                </children>
             </GridPane>
-            <GridPane GridPane.rowIndex="1">
+            <GridPane prefHeight="197.0" prefWidth="312.0" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
@@ -82,17 +106,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="38.0" prefWidth="206.0" text="Maze Type:" GridPane.columnIndex="1">
+                  <Label prefHeight="38.0" prefWidth="206.0" text="Maze Type:" GridPane.columnIndex="1" GridPane.columnSpan="2">
                      <font>
                         <Font name="Elephant Italic" size="20.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="38.0" prefWidth="207.0" text="Solution Algorithm:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label prefHeight="38.0" prefWidth="207.0" text="Solution Algorithm:" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="Elephant Italic" size="20.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="38.0" prefWidth="207.0" text="Sound:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label prefHeight="38.0" prefWidth="207.0" text="Sound:" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="Elephant Italic" size="20.0" />
                      </font>
@@ -102,6 +126,7 @@
             <GridPane>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
@@ -110,7 +135,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="38.0" prefWidth="201.0" text="Threadpool Size:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label prefHeight="38.0" prefWidth="201.0" text="Threadpool Size:" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="Elephant Italic" size="20.0" />
                      </font>
@@ -135,6 +160,11 @@
                   </TextField>
                </children>
             </GridPane>
+            <Button fx:id="backButton1" mnemonicParsing="false" onAction="#backToMenu" prefHeight="78.0" prefWidth="157.0" text="Apply" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Button>
             </children>
         </GridPane>
     </children>
