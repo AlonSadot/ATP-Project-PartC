@@ -102,10 +102,6 @@ public class MiddleSceneController implements Initializable, Observer {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!MyViewController.playing)
                 MyViewController.music();
-        Configurations config = Configurations.getInstance();
-        config.setProperty("threadPoolSize","7");
-        config.setProperty("mazeGeneratingAlgorithm","MyGenerator");
-        config.setProperty("mazeSearchingAlgorithm","BFS");
 
         mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
         mainImageView.fitHeightProperty().bind(mainPane.heightProperty());

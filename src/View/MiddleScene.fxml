@@ -65,7 +65,7 @@
                         <Font size="18.0" />
                     </font>
                 </Button>
-                <Button fx:id="Menu_button" contentDisplay="RIGHT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="5000.0" prefWidth="5000.0" text="Back to Main Menu" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Button fx:id="Menu_button" contentDisplay="RIGHT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="5000.0" prefWidth="5000.0" text="Back" GridPane.columnIndex="2" GridPane.rowIndex="1" />
 
                             <RadioButton fx:id="rb1" mnemonicParsing="false" prefHeight="5000.0" prefWidth="5000.0" text="Red Drake" GridPane.rowIndex="6">
                     <toggleGroup>

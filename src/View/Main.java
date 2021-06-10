@@ -32,6 +32,12 @@ public class Main extends Application {
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
 
+        Configurations config = Configurations.getInstance();
+        config.setProperty("threadPoolSize","7");
+        config.setProperty("mazeGeneratingAlgorithm","MyGenerator");
+        config.setProperty("mazeSearchingAlgorithm","BFS");
+
+
         solveSearchProblemServer.start();
         mazeGeneratingServer.start();
         launch(args);

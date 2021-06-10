@@ -76,11 +76,11 @@ public class MazeWindowController implements Initializable, Observer {
 
     public void returnBack(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
-        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
         if (musicChecked)
             mediaPlayer.stop();
         Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
-        backButton.getScene().setRoot(root2);
+        backButton.getScene().setRoot(root);
     }
 
 
