@@ -214,34 +214,11 @@ public class MazeWindowController implements Initializable, Observer {
         keyEvent.consume();
 
         if (myViewModel.getPlayerRow() == myViewModel.getMaze().getGoalPosition().getRowIndex() && myViewModel.getPlayerCol() == myViewModel.getMaze().getGoalPosition().getColumnIndex()){
-            goalReached();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("You have won !");
-            alert.setHeaderText("");
-            alert.setContentText("");
-            Image image = new Image("/images/youWin.jpg");
-            ImageView imageView = new ImageView(image);
-            alert.setGraphic(imageView);
-            ButtonType returnButton = new ButtonType("Back to main menu");
-            ButtonType restartButton = new ButtonType("Restart maze");
-            alert.getButtonTypes().setAll(returnButton, restartButton);
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == returnButton){
-                try {
-                    returnBack(null);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            else {
-                setPlayerPosition(myViewModel.getMaze().getStartPosition().getRowIndex(),myViewModel.getMaze().getStartPosition().getColumnIndex());
-                myViewModel.setPlayerRow(myViewModel.getMaze().getStartPosition().getRowIndex());
-                myViewModel.setPlayerCol(myViewModel.getMaze().getStartPosition().getColumnIndex());
-                playMusic();
-            }
+            won();
         }
     }
+
+
 
     public void setPlayerPosition(int row, int col){
         mazeDisplay.setPlayerPosition(row, col);
@@ -317,6 +294,35 @@ public class MazeWindowController implements Initializable, Observer {
                 setCenterPivot();
             }
             event.consume();
+        }
+    }
+
+    private void won(){
+        goalReached();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("You have won !");
+        alert.setHeaderText("");
+        alert.setContentText("");
+        Image image = new Image("/images/youWin.jpg");
+        ImageView imageView = new ImageView(image);
+        alert.setGraphic(imageView);
+        ButtonType returnButton = new ButtonType("Back to main menu");
+        ButtonType restartButton = new ButtonType("Restart maze");
+        alert.getButtonTypes().setAll(returnButton, restartButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == returnButton){
+            try {
+                returnBack(null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            setPlayerPosition(myViewModel.getMaze().getStartPosition().getRowIndex(),myViewModel.getMaze().getStartPosition().getColumnIndex());
+            myViewModel.setPlayerRow(myViewModel.getMaze().getStartPosition().getRowIndex());
+            myViewModel.setPlayerCol(myViewModel.getMaze().getStartPosition().getColumnIndex());
+            playMusic();
         }
     }
 
