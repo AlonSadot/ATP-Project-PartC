@@ -159,6 +159,7 @@ public class MazeWindowController implements Initializable, Observer {
     public void SaveMaze(ActionEvent actionEvent){
         MyViewController.mouseAudio();
         TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setGraphic(null);
         textInputDialog.setHeaderText("Saving Maze:");
         textInputDialog.setTitle("Saving Maze");
         textInputDialog.setContentText("Please enter the saved maze name:");
