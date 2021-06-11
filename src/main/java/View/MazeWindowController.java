@@ -245,7 +245,7 @@ public class MazeWindowController implements Initializable, Observer {
     public void zoomHandle(ScrollEvent event) {
         if(event.isControlDown()) {
             boolean flag = false;
-            double delta = 1.1;
+            double delta = 1.5;
 
             double scale = getScale();
             double oldScale = scale;

@@ -48,6 +48,7 @@ public class LoadWindowController  implements Initializable, Observer {
             MazeWindowController.setLoadedName(mazeName);
             MazeWindowController.setMazeType(false);
             MyViewController.mediaPlayer.stop();
+            MyViewController.playing=false;
             Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MazeWindow.fxml"));
             loadButton.getScene().setRoot(root2);
         }
@@ -64,9 +65,10 @@ public class LoadWindowController  implements Initializable, Observer {
 
         File directory = new File("Saved_Mazes");
         File[] contents = directory.listFiles();
-
-        for ( File f : contents) {
-            listView.getItems().add(f.getPath().substring(12));
+        if (contents.length!=0) {
+            for (File f : contents) {
+                listView.getItems().add(f.getPath().substring(12));
+            }
         }
         mainImageView.fitWidthProperty().bind(main_pane.widthProperty());
         mainImageView.fitHeightProperty().bind(main_pane.heightProperty());
