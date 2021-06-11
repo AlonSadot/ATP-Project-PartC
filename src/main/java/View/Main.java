@@ -14,12 +14,12 @@ public class Main extends Application {
     static boolean playing = false;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        if (MyViewController.mediaPlayer != null)
-            playing = MyViewController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
+        if (MainMenuController.mediaPlayer != null)
+            playing = MainMenuController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
         if (!playing)
-            MyViewController.music();
+            MainMenuController.music();
 
-        Scene scene = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
+        Scene scene = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         primaryStage.setScene(scene);
         primaryStage.show();
 

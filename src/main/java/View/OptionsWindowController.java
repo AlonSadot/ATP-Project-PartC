@@ -38,15 +38,15 @@ public class OptionsWindowController implements Initializable, Observer {
     }
 
     public void backToMenu(ActionEvent event) throws IOException {
-        MyViewController.mouseAudio();
-        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
+        MainMenuController.mouseAudio();
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
     }
 
     public void ApplyButton(ActionEvent event) throws IOException {
-        MyViewController.mouseAudio();
+        MainMenuController.mouseAudio();
         Configurations config = Configurations.getInstance();
         if (isNumeric(poolSize.getText()) && Integer.parseInt(poolSize.getText()) >= 0)
             config.setProperty("threadPoolSize",poolSize.getText());
@@ -75,16 +75,16 @@ public class OptionsWindowController implements Initializable, Observer {
 
         if (sKey.isSelected()){
             musicChecked = true;
-            if (!MyViewController.playing)
-                MyViewController.music();
+            if (!MainMenuController.playing)
+                MainMenuController.music();
         }
         else{
-            MyViewController.mediaPlayer.stop();
+            MainMenuController.mediaPlayer.stop();
             musicChecked = false;
-            MyViewController.playing = false;
+            MainMenuController.playing = false;
         }
 
-        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();

@@ -33,8 +33,8 @@ public class MiddleSceneController implements Initializable, Observer {
     public RadioButton rb3;
 
     public void returnToMenu(ActionEvent event) throws IOException {
-        MyViewController.mouseAudio();
-        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
+        MainMenuController.mouseAudio();
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
@@ -42,7 +42,7 @@ public class MiddleSceneController implements Initializable, Observer {
 
 
     public void playButton(ActionEvent event) throws IOException{
-        MyViewController.mouseAudio();
+        MainMenuController.mouseAudio();
         if (rb1.isSelected())
             MazeDisplay.setDragonColor(1);
         else if (rb2.isSelected())
@@ -59,14 +59,14 @@ public class MiddleSceneController implements Initializable, Observer {
             return;
         }
         if ((isNumeric(RowText.getText()) && isNumeric(ColText.getText())) && (Integer.parseInt(RowText.getText()) >= 2 && Integer.parseInt(ColText.getText()) >= 2)){
-                MazeWindowController.setMazeRows(Integer.parseInt(RowText.getText()));
-                MazeWindowController.setMazeCols(Integer.parseInt(ColText.getText()));
-                MazeWindowController.setMazeType(true);
-//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MazeWindow.fxml"));
+                MyViewController.setMazeRows(Integer.parseInt(RowText.getText()));
+                MyViewController.setMazeCols(Integer.parseInt(ColText.getText()));
+                MyViewController.setMazeType(true);
+//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MyView.fxml"));
 //                fxmlLoader.load();
-                MyViewController.mediaPlayer.stop();
-                MyViewController.playing=false;
-                Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MazeWindow.fxml"));
+                MainMenuController.mediaPlayer.stop();
+                MainMenuController.playing=false;
+                Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
                 Play_button.getScene().setRoot(root2);
         }
         else{
@@ -97,8 +97,8 @@ public class MiddleSceneController implements Initializable, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!MyViewController.playing)
-                MyViewController.music();
+        if (!MainMenuController.playing)
+                MainMenuController.music();
 
         mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
         mainImageView.fitHeightProperty().bind(mainPane.heightProperty());

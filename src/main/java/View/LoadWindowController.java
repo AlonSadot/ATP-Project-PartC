@@ -30,26 +30,26 @@ public class LoadWindowController  implements Initializable, Observer {
     public ImageView mainImageView;
 
     public void backToMenu(ActionEvent event) throws IOException {
-        MyViewController.mouseAudio();
-        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
+        MainMenuController.mouseAudio();
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
     }
 
     public void LoadMaze(ActionEvent event) throws IOException {
-        MyViewController.mouseAudio();
+        MainMenuController.mouseAudio();
         MultipleSelectionModel mazeFile = listView.getSelectionModel();
         String mazeName = mazeFile.getSelectedItems().toString();
         mazeName = mazeName.substring(1,mazeName.length()-1);
         if (mazeFile.getSelectedItems().size() == 0)
             errorLabel.setText("Please choose a maze to load");
         else{
-            MazeWindowController.setLoadedName(mazeName);
-            MazeWindowController.setMazeType(false);
-            MyViewController.mediaPlayer.stop();
-            MyViewController.playing=false;
-            Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MazeWindow.fxml"));
+            MyViewController.setLoadedName(mazeName);
+            MyViewController.setMazeType(false);
+            MainMenuController.mediaPlayer.stop();
+            MainMenuController.playing=false;
+            Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
             loadButton.getScene().setRoot(root2);
         }
     }

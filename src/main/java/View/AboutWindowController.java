@@ -21,8 +21,8 @@ public class AboutWindowController implements Initializable, Observer {
     public ImageView mainImageView;
 
     public void backToMenu(ActionEvent event) throws IOException {
-        MyViewController.mouseAudio();
-        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
+        MainMenuController.mouseAudio();
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
