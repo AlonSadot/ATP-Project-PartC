@@ -100,6 +100,37 @@ public class MyModel extends Observable implements IModel{
         notifyObservers("maze solved");
     }
 
+    public void dragMoving(double deltaX, double deltaY){
+        int rowDelta = (int)Math.round(deltaY);
+        int colDelta = (int)Math.round(deltaX);
+
+        if (rowDelta == 0 && colDelta !=0) {
+            if (colDelta<0)
+                updatePlayerLocation(MovementDirection.LEFT);
+            else if (colDelta>0)
+                updatePlayerLocation(MovementDirection.RIGHT);
+        }
+        else if (rowDelta != 0 && colDelta == 0) {
+            if (rowDelta<0)
+                updatePlayerLocation(MovementDirection.UP);
+            else if (rowDelta>0)
+                updatePlayerLocation(MovementDirection.DOWN);
+        }
+        else if (rowDelta == 1 && colDelta == 1) {
+            updatePlayerLocation(MovementDirection.DOWNRIGHT);
+        }
+        else if (rowDelta == 1 && colDelta == -1) {
+            updatePlayerLocation(MovementDirection.DOWNLEFT);
+        }
+        else if (rowDelta == -1 && colDelta == -1) {
+            updatePlayerLocation(MovementDirection.UPLEFT);
+        }
+        else if (rowDelta == -1 && colDelta == 1) {
+            updatePlayerLocation(MovementDirection.UPRIGHT);
+        }
+
+    }
+
     @Override
     public Solution getSolution() {
         return solution;

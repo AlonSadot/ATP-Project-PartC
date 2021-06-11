@@ -18,4 +18,5 @@ public interface IModel {
     void loadMaze(String mazeName);
     void setPlayerCol(int playerCol);
     void setPlayerRow(int playerRow);
+    void dragMoving(double deltaX, double deltaY);
 }

@@ -63,47 +63,33 @@ public class MyViewController implements IView, Initializable, Observer {
     }
 
 
-    public void setMyViewModel(MyViewModel myViewModel) {
-        this.myViewModel = myViewModel;
-        this.myViewModel.addObserver(this);
-    }
 
     @Override
     public void update(Observable o, Object arg) {
     }
 
 
-
-    public void setUpdatePlayerRow(int updatePlayerRow) {
-        this.updatePlayerRow.set(updatePlayerRow + "");
-    }
-
-    public void setUpdatePlayerCol(int updatePlayerCol) {
-        this.updatePlayerCol.set(updatePlayerCol + "");
-    }
-
-
     public void buttonStart(ActionEvent event) throws IOException {
         mouseAudio();
-        Parent root2 = FXMLLoader.load(getClass().getResource("MiddleScene.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MiddleScene.fxml"));
         Start_button.getScene().setRoot(root2);
     }
 
     public void buttonLoad(ActionEvent event) throws IOException {
         mouseAudio();
-        Parent root2 = FXMLLoader.load(getClass().getResource("LoadWindow.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("LoadWindow.fxml"));
         Start_button.getScene().setRoot(root2);
     }
 
     public void buttonAbout(ActionEvent event) throws IOException {
         mouseAudio();
-        Parent root2 = FXMLLoader.load(getClass().getResource("AboutWindow.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("AboutWindow.fxml"));
         Start_button.getScene().setRoot(root2);
     }
 
     public void buttonOptions(ActionEvent event) throws IOException {
         mouseAudio();
-        Parent root2 = FXMLLoader.load(getClass().getResource("OptionsWindow.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("OptionsWindow.fxml"));
         Start_button.getScene().setRoot(root2);
     }
 

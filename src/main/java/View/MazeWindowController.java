@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -20,7 +19,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -79,7 +77,7 @@ public class MazeWindowController implements Initializable, Observer {
         MyViewController.mouseAudio();
         if (musicChecked)
             mediaPlayer.stop();
-        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
         Stage currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
@@ -94,40 +92,13 @@ public class MazeWindowController implements Initializable, Observer {
     public void mouseDragged(MouseEvent event){
         double deltaX = ((event.getX() - mazeDisplay.getCellWidth()/2)/mazeDisplay.getCellWidth())-myViewModel.getPlayerCol();
         double deltaY = ((event.getY() - mazeDisplay.getCellHeight()/2)/mazeDisplay.getCellHeight())-myViewModel.getPlayerRow();
-
-        int rowDelta = (int)Math.round(deltaY);
-        int colDelta = (int)Math.round(deltaX);
-
-        try {
-            Robot r = new Robot();
-            if (rowDelta == 0 && colDelta !=0) {
-                if (colDelta<0)
-                    r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD4);
-                else if (colDelta>0)
-                    r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD6);
-            }
-            else if (rowDelta != 0 && colDelta == 0) {
-                 if (rowDelta<0)
-                     r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD8);
-                 else if (rowDelta>0)
-                     r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD2);
-            }
-            else if (rowDelta == 1 && colDelta == 1) {
-                    r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD3);
-            }
-            else if (rowDelta == 1 && colDelta == -1) {
-                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD1);
-            }
-            else if (rowDelta == -1 && colDelta == -1) {
-                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD7);
-            }
-            else if (rowDelta == -1 && colDelta == 1) {
-                r.keyPress(java.awt.event.KeyEvent.VK_NUMPAD9);
-            }
-
-        } catch (AWTException e) {
+        myViewModel.dragMoving(deltaX,deltaY);
+        if (myViewModel.getPlayerRow() == myViewModel.getMaze().getGoalPosition().getRowIndex() && myViewModel.getPlayerCol() == myViewModel.getMaze().getGoalPosition().getColumnIndex()) {
+            won();
         }
     }
+
+
         public void setMazeViewModel(MyViewModel myViewModel) {
         this.myViewModel = myViewModel;
         this.myViewModel.addObserver(this);

@@ -27,6 +27,10 @@ public class MyViewModel extends Observable implements Observer {
         this.model.setPlayerCol(c);
     }
 
+    public void dragMoving(double deltaX, double deltaY){
+        model.dragMoving(deltaX,deltaY);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         setChanged();

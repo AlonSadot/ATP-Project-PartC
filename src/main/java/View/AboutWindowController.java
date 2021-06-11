@@ -22,7 +22,7 @@ public class AboutWindowController implements Initializable, Observer {
 
     public void backToMenu(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
-        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();

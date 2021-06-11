@@ -1,7 +1,6 @@
 package View;
 
 import Server.Configurations;
-import algorithms.mazeGenerators.MyMazeGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +12,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,7 +39,7 @@ public class OptionsWindowController implements Initializable, Observer {
 
     public void backToMenu(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
-        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
@@ -86,7 +84,7 @@ public class OptionsWindowController implements Initializable, Observer {
             MyViewController.playing = false;
         }
 
-        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("../../../../resources/MyView.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();

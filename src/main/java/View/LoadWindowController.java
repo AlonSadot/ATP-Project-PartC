@@ -31,7 +31,7 @@ public class LoadWindowController  implements Initializable, Observer {
 
     public void backToMenu(ActionEvent event) throws IOException {
         MyViewController.mouseAudio();
-        Scene root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
@@ -47,10 +47,8 @@ public class LoadWindowController  implements Initializable, Observer {
         else{
             MazeWindowController.setLoadedName(mazeName);
             MazeWindowController.setMazeType(false);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MazeWindow.fxml"));
-            fxmlLoader.load();
             MyViewController.mediaPlayer.stop();
-            Parent root2 = FXMLLoader.load(getClass().getResource("MazeWindow.fxml"));
+            Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MazeWindow.fxml"));
             loadButton.getScene().setRoot(root2);
         }
     }
