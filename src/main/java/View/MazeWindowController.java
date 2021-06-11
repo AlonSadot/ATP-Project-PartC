@@ -24,9 +24,11 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -77,6 +79,7 @@ public class MazeWindowController implements Initializable, Observer {
         MyViewController.mouseAudio();
         if (musicChecked)
             mediaPlayer.stop();
+        System.out.println(event.toString());
         Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
         Stage currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
@@ -284,13 +287,8 @@ public class MazeWindowController implements Initializable, Observer {
         alert.getButtonTypes().setAll(returnButton, restartButton);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == returnButton){
-            try {
-                returnBack(null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        if (result.get() == returnButton)
+            backButton.fire();
         else {
             setPlayerPosition(myViewModel.getMaze().getStartPosition().getRowIndex(),myViewModel.getMaze().getStartPosition().getColumnIndex());
             myViewModel.setPlayerRow(myViewModel.getMaze().getStartPosition().getRowIndex());
