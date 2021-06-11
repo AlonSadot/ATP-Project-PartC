@@ -84,7 +84,7 @@ public class OptionsWindowController implements Initializable, Observer {
             MyViewController.playing = false;
         }
 
-        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("../../../../resources/MyView.fxml"));
+        Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
