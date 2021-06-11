@@ -38,7 +38,7 @@
                 <RowConstraints maxHeight="5000.0" minHeight="10.0" prefHeight="5000.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <GridPane prefHeight="5000.0" prefWidth="5000.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                <GridPane prefHeight="5000.0" prefWidth="5000.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="5000.0" minWidth="10.0" prefWidth="5000.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="5000.0" minWidth="10.0" prefWidth="5000.0" />
@@ -48,26 +48,27 @@
                         <RowConstraints maxHeight="5000.0" minHeight="10.0" prefHeight="5000.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <TextField fx:id="RowText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="116.0" GridPane.columnIndex="1" />
-                        <TextField fx:id="ColText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="116.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="RowText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="146.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="ColText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label prefHeight="33.0" prefWidth="161.0" text="Row Number : ">
                      <font>
                         <Font name="Bauhaus 93" size="20.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                   <Label prefHeight="33.0" prefWidth="161.0" text="Column Number :" GridPane.rowIndex="1">
                      <font>
                         <Font name="Bauhaus 93" size="20.0" />
                      </font></Label>
                     </children>
                 </GridPane>
-                <Button fx:id="Play_button" mnemonicParsing="false" onAction="#playButton" prefHeight="5000.0" prefWidth="5000.0" text="Start" GridPane.rowIndex="1">
+                <Button fx:id="Play_button" mnemonicParsing="false" onAction="#playButton" prefHeight="5000.0" prefWidth="5000.0" text="Start" GridPane.columnIndex="2" GridPane.rowIndex="7">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Button>
-                <Button fx:id="Menu_button" contentDisplay="RIGHT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="5000.0" prefWidth="5000.0" text="Back" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Button fx:id="Menu_button" contentDisplay="RIGHT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="5000.0" prefWidth="5000.0" text="Back" GridPane.rowIndex="7" />
 
-                            <RadioButton fx:id="rb1" mnemonicParsing="false" prefHeight="5000.0" prefWidth="5000.0" text="Red Drake" GridPane.rowIndex="6">
+                            <RadioButton fx:id="rb1" mnemonicParsing="false" prefHeight="5000.0" prefWidth="5000.0" text="Red Drake" GridPane.rowIndex="5">
                     <toggleGroup>
                         <ToggleGroup fx:id="toggleGroup" />
                     </toggleGroup>
@@ -75,37 +76,37 @@
                   <Font name="Bauhaus 93" size="24.0" />
                </font>
                 </RadioButton>
-                <RadioButton fx:id="rb3" mnemonicParsing="false" prefHeight="5000.0" prefWidth="5000.0" text="Golden Drake" toggleGroup="$toggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                <RadioButton fx:id="rb3" mnemonicParsing="false" prefHeight="5000.0" prefWidth="5000.0" text="Golden Drake" toggleGroup="$toggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <font>
                   <Font name="Bauhaus 93" size="24.0" />
                </font>
             </RadioButton>
-                <RadioButton fx:id="rb2" mnemonicParsing="false" prefHeight="5000.0" prefWidth="5000.0" text="Blue Drake" toggleGroup="$toggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                <RadioButton fx:id="rb2" mnemonicParsing="false" prefHeight="5000.0" prefWidth="5000.0" text="Blue Drake" toggleGroup="$toggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font name="Bauhaus 93" size="24.0" />
                </font>
             </RadioButton>
-                <ImageView fx:id="Dragon1" fitHeight="126.0" fitWidth="234.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
+                <ImageView fx:id="Dragon1" fitHeight="126.0" fitWidth="234.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
                     <image>
                         <Image url="/images/RedDrag.gif" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="Dragon2" fitHeight="124.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                <ImageView fx:id="Dragon2" fitHeight="124.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <image>
                         <Image url="/images/BlueDrag.gif" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="Dragon3" fitHeight="123.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                <ImageView fx:id="Dragon3" fitHeight="123.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
                     <image>
                         <Image url="/images/YellowDrag.gif" />
                     </image>
                 </ImageView>
-            <Label prefHeight="5000.0" prefWidth="5000.0" text="Enter maze size:" GridPane.rowIndex="3">
+            <Label prefHeight="5000.0" prefWidth="5000.0" text="Enter maze size:" GridPane.rowIndex="1">
                <font>
                   <Font name="Bauhaus 93" size="28.0" />
                </font>
             </Label>
-            <Label prefHeight="5000.0" prefWidth="5000.0" text="Choose your drake:" GridPane.rowIndex="5">
+            <Label prefHeight="5000.0" prefWidth="5000.0" text="Choose your drake:" GridPane.rowIndex="4">
                <font>
                   <Font name="Bauhaus 93" size="28.0" />
                </font>
