@@ -16,9 +16,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         if (MainMenuController.mediaPlayer != null)
             playing = MainMenuController.mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING);
-        if (!playing)
-            MainMenuController.music();
-
         Scene scene = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -26,15 +23,10 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Configurations config = Configurations.getInstance();
+        config.setConfigPath("resources/config.properties");
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
-
-        Configurations config = Configurations.getInstance();
-        config.setProperty("threadPoolSize","7");
-        config.setProperty("mazeGeneratingAlgorithm","MyGenerator");
-        config.setProperty("mazeSearchingAlgorithm","BFS");
-
-
         solveSearchProblemServer.start();
         mazeGeneratingServer.start();
         launch(args);

@@ -27,6 +27,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Observable;
@@ -73,7 +74,7 @@ public class MyViewController implements Initializable, Observer ,IView {
     }
 
     public void returnBack(ActionEvent event) throws IOException {
-        MainMenuController.mouseAudio();
+        mouseAudio();
         if (musicChecked)
             mediaPlayer.stop();
         System.out.println(event.toString());
@@ -116,7 +117,7 @@ public class MyViewController implements Initializable, Observer ,IView {
     {
         if (isMusic()){
             mediaPlayer.stop();
-            Media mediaMusic = new Media(Paths.get("./resources/music/GoalReached.mp3").toUri().toString());
+            Media mediaMusic = new Media(getClass().getResource("/music/GoalReached.mp3").toString());
             mediaPlayer = new MediaPlayer(mediaMusic);
             mediaPlayer.setCycleCount(1);
             mediaPlayer.play();
@@ -124,9 +125,9 @@ public class MyViewController implements Initializable, Observer ,IView {
         }
     }
 
-    public static void playMusic(){
+    public void playMusic(){
         if (isMusic()){
-            Media mediaMusic = new Media(Paths.get("./resources/music/MazeTravel.mp3").toUri().toString());
+            Media mediaMusic = new Media(getClass().getResource("/music/MazeTravel.mp3").toString());
             mediaPlayer = new MediaPlayer(mediaMusic);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
@@ -135,18 +136,29 @@ public class MyViewController implements Initializable, Observer ,IView {
     }
 
     public void solveMaze(ActionEvent actionEvent) {
-        MainMenuController.mouseAudio();
+        mouseAudio();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Solving maze...");
         alert.show();
         myViewModel.solveMaze();
     }
 
+    public void mouseAudio(){
+        if (isMusic()){
+            Media mouseClicked = new Media(getClass().getResource("/music/Click.mp3").toString());
+            MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
+            mediaPlayer2.setCycleCount(1);
+            mediaPlayer2.play();
+            mediaPlayer2.setVolume(0.3);
+        }
+    }
+
     public void helpButton(ActionEvent actionEvent){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Help");
-        alert.setContentText("The goal of the game is to get your dragon back to his egg. \n" +
-                "you can move your dragon by using the numpad numbers or by dragging your dragon on screen");
+        alert.setContentText("The goal of the game is getting your dragon back to his egg. \n" +
+                "You can move your dragon by using the numpad numbers, or dragging your dragon on screen.\n"
+                + "To zoom in or out, press and hold the ctrl key and use your mouse scroll");
         alert.setGraphic(null);
         alert.setHeaderText("");
         alert.setHeight(200);
@@ -154,7 +166,7 @@ public class MyViewController implements Initializable, Observer ,IView {
     }
 
     public void SaveMaze(ActionEvent actionEvent){
-        MainMenuController.mouseAudio();
+        mouseAudio();
         TextInputDialog textInputDialog = new TextInputDialog();
         textInputDialog.setGraphic(null);
         textInputDialog.setHeaderText("Saving Maze:");
@@ -199,15 +211,6 @@ public class MyViewController implements Initializable, Observer ,IView {
         setUpdatePlayerRow(row);
         setUpdatePlayerCol(col);
     }
-
-//    public void openFile(ActionEvent actionEvent) {
-//        FileChooser fc = new FileChooser();
-//        fc.setTitle("Open maze");
-//        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Maze files (*.maze)", "*.maze"));
-//        fc.setInitialDirectory(new File("./resources"));
-//        File chosen = fc.showOpenDialog(null);
-//        //...
-//    }
 
     public static double clamp(double value, double min, double max) {
 
@@ -271,13 +274,17 @@ public class MyViewController implements Initializable, Observer ,IView {
         }
     }
 
+    private InputStream getImageResourceAsStream(String imagePath){
+        return getClass().getClassLoader().getResourceAsStream(imagePath);
+    }
+
     private void won(){
         goalReached();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("You have won !");
         alert.setHeaderText("");
         alert.setContentText("");
-        Image image = new Image("/images/youWin.jpg");
+        Image image = new Image(getImageResourceAsStream("images/youWin.jpg"));
         ImageView imageView = new ImageView(image);
         alert.setGraphic(imageView);
         ButtonType returnButton = new ButtonType("Back to main menu");

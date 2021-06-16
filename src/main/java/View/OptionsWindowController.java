@@ -12,6 +12,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,15 +40,25 @@ public class OptionsWindowController implements Initializable, Observer {
     }
 
     public void backToMenu(ActionEvent event) throws IOException {
-        MainMenuController.mouseAudio();
+        mouseAudio();
         Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
     }
 
+    public void mouseAudio(){
+        if (isMusic()){
+            Media mouseClicked = new Media(getClass().getResource("/music/Click.mp3").toString());
+            MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
+            mediaPlayer2.setCycleCount(1);
+            mediaPlayer2.play();
+            mediaPlayer2.setVolume(0.3);
+        }
+    }
+
     public void ApplyButton(ActionEvent event) throws IOException {
-        MainMenuController.mouseAudio();
+        mouseAudio();
         Configurations config = Configurations.getInstance();
         if (isNumeric(poolSize.getText()) && Integer.parseInt(poolSize.getText()) >= 0)
             config.setProperty("threadPoolSize",poolSize.getText());
@@ -75,8 +87,6 @@ public class OptionsWindowController implements Initializable, Observer {
 
         if (sKey.isSelected()){
             musicChecked = true;
-            if (!MainMenuController.playing)
-                MainMenuController.music();
         }
         else{
             MainMenuController.mediaPlayer.stop();

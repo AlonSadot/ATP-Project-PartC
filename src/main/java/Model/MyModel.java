@@ -1,22 +1,20 @@
 package Model;
 
 import Client.Client;
+import Client.IClientStrategy;
 import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
-import algorithms.mazeGenerators.AMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.AState;
 import algorithms.search.Solution;
-import Client.IClientStrategy;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -244,7 +242,7 @@ public class MyModel extends Observable implements IModel{
     @Override
     public void loadMaze(String mazeName) {
         try {
-            byte[] byteArray = Files.readAllBytes(Paths.get("Saved_Mazes/" + mazeName));
+            byte[] byteArray = Files.readAllBytes(Paths.get(System.getProperty("user.dir")+"/Saved_Mazes/" + mazeName));
             InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(byteArray));
             byte[] decompressedMaze = new byte[byteArray.length * 100 + 10  /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
             is.read(decompressedMaze); //Fill decompressedMaze with bytes

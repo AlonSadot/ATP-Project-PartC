@@ -3,28 +3,15 @@ package View;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
-import algorithms.search.MazeState;
 import algorithms.search.Solution;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.Node;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.nio.file.Paths;
-import java.util.Optional;
+import java.io.InputStream;
 
 public class MazeDisplay extends Canvas {
 
@@ -32,13 +19,12 @@ public class MazeDisplay extends Canvas {
     private Solution solution;
     private int playerRow = 0;
     private int playerCol = 0;
-    String picturePath = "file:./resources/images/DragonDown.png";
+    Image currentImage = new Image(getImageResourceAsStream("images/RedDragonDown.png"));
     public static int DragonColor = 1;
-    public static MediaPlayer mediaPlayer;
     private double cellHeight,cellWidth;
     StringProperty imageFileNameWall = new SimpleStringProperty();
     StringProperty imageFileNamePlayer = new SimpleStringProperty();
-    public static boolean mazeType = true;
+
 
 
     public static void setDragonColor(int dragonColor) { MazeDisplay.DragonColor = dragonColor; }
@@ -86,37 +72,40 @@ public class MazeDisplay extends Canvas {
         draw();
     }
 
+    private InputStream getImageResourceAsStream(String imagePath){
+        return getClass().getClassLoader().getResourceAsStream(imagePath);
+    }
 
     public void setPlayerPosition(int row, int col) {
         if (DragonColor == 1){
             if (row > playerRow)
-                picturePath = "file:./resources/images/RedDragonDown.png";
+                currentImage = new Image(getImageResourceAsStream("images/RedDragonDown.png"));
             else if (row < playerRow)
-                picturePath = "file:./resources/images/RedDragonUp.png";
+                currentImage = new Image(getImageResourceAsStream("images/RedDragonUp.png"));
             else if (col >playerCol)
-                picturePath = "file:./resources/images/RedDragonRight.png";
+                currentImage = new Image(getImageResourceAsStream("images/RedDragonRight.png"));
             else
-                picturePath = "file:./resources/images/RedDragonLeft.png";
+                currentImage = new Image(getImageResourceAsStream("images/RedDragonLeft.png"));
         }
         else if (DragonColor == 2){
             if (row > playerRow)
-                picturePath = "file:./resources/images/BlueDragonDown.png";
+                currentImage = new Image(getImageResourceAsStream("images/BlueDragonDown.png"));
             else if (row < playerRow)
-                picturePath = "file:./resources/images/BlueDragonUp.png";
+                currentImage = new Image(getImageResourceAsStream("images/BlueDragonUp.png"));
             else if (col >playerCol)
-                picturePath = "file:./resources/images/BlueDragonRight.png";
+                currentImage = new Image(getImageResourceAsStream("images/BlueDragonRight.png"));
             else
-                picturePath = "file:./resources/images/BlueDragonLeft.png";
+                currentImage = new Image(getImageResourceAsStream("images/BlueDragonLeft.png"));
         }
         else{
             if (row > playerRow)
-                picturePath = "file:./resources/images/YellowDragonDown.png";
+                currentImage = new Image(getImageResourceAsStream("images/YellowDragonDown.png"));
             else if (row < playerRow)
-                picturePath = "file:./resources/images/YellowDragonUp.png";
+                currentImage = new Image(getImageResourceAsStream("images/YellowDragonUp.png"));
             else if (col >playerCol)
-                picturePath = "file:./resources/images/YellowDragonRight.png";
+                currentImage = new Image(getImageResourceAsStream("images/YellowDragonRight.png"));
             else
-                picturePath = "file:./resources/images/YellowDragonLeft.png";
+                currentImage = new Image(getImageResourceAsStream("images/YellowDragonLeft.png"));
         }
 
 
@@ -172,8 +161,7 @@ public class MazeDisplay extends Canvas {
 
 
     private void drawSolution(GraphicsContext graphicsContext, double cellHeight, double cellWidth) {
-        // need to be implemented
-        Image solutionImage = new Image("/images/FireSolve.png");
+        Image solutionImage = new Image(getImageResourceAsStream("images/FireSolve.png"));
 
         Position sol;
         for (AState state : solution.getSolutionPath()){
@@ -182,7 +170,6 @@ public class MazeDisplay extends Canvas {
 
         }
 
-        System.out.println("drawing solution...");
     }
 
     public double getCellHeight() {
@@ -205,7 +192,6 @@ public class MazeDisplay extends Canvas {
             cellWidth = canvasWidth / cols;
 
             GraphicsContext graphicsContext = getGraphicsContext2D();
-            //clear the canvas:
             graphicsContext.clearRect(0, 0, canvasWidth, canvasHeight);
 
             drawMazeWalls(graphicsContext, cellHeight, cellWidth, rows, cols);
@@ -219,11 +205,10 @@ public class MazeDisplay extends Canvas {
         double x = getPlayerCol() * cellWidth;
         double y = getPlayerRow() * cellHeight;
 
-        Image playerImage =  new Image(picturePath);
-        if(playerImage == null)
+        if(currentImage == null)
             graphicsContext.fillRect(x, y, cellWidth, cellHeight);
         else{
-            graphicsContext.drawImage(playerImage, x, y, cellWidth, cellHeight);
+            graphicsContext.drawImage(currentImage, x, y, cellWidth, cellHeight);
             }
         }
 
@@ -232,9 +217,9 @@ public class MazeDisplay extends Canvas {
 
         graphicsContext.setFill(Color.RED);
         javafx.scene.image.Image wallImage = null;
-        try{
-            wallImage = new Image(new FileInputStream(getImageFileNameWall()));
-        } catch (FileNotFoundException e) {
+
+            wallImage = new Image(getImageResourceAsStream(getImageFileNameWall()));
+        if (wallImage == null) {
             System.out.println("There is no wall image file");
         }
         for (int i = 0; i < rows; i++) {
@@ -250,8 +235,8 @@ public class MazeDisplay extends Canvas {
                 }
             }
         }
-        Image startingPoint = new Image("file:./resources/images/BluePort.png");
-        Image goalPoint = new Image("file:./resources/images/DragonEgg.png");
+        Image startingPoint = new Image(getImageResourceAsStream("images/BluePort.png"));
+        Image goalPoint = new Image(getImageResourceAsStream("images/DragonEgg.png"));
         double x,y;
         x = maze.getStartPosition().getColumnIndex()*cellWidth;
         y = maze.getStartPosition().getRowIndex()*cellHeight;

@@ -10,18 +10,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import javafx.scene.image.ImageView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class LoadWindowController  implements Initializable, Observer {
+import static View.OptionsWindowController.isMusic;
+
+public class LoadWindowController  implements Initializable {
     public Stage currStage;
     public ListView listView;
     public Label errorLabel;
@@ -30,15 +32,25 @@ public class LoadWindowController  implements Initializable, Observer {
     public ImageView mainImageView;
 
     public void backToMenu(ActionEvent event) throws IOException {
-        MainMenuController.mouseAudio();
+        mouseAudio();
         Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
     }
 
+    public void mouseAudio(){
+        if (isMusic()){
+            Media mouseClicked = new Media(getClass().getResource("/music/Click.mp3").toString());
+            MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
+            mediaPlayer2.setCycleCount(1);
+            mediaPlayer2.play();
+            mediaPlayer2.setVolume(0.3);
+        }
+    }
+
     public void LoadMaze(ActionEvent event) throws IOException {
-        MainMenuController.mouseAudio();
+        mouseAudio();
         MultipleSelectionModel mazeFile = listView.getSelectionModel();
         String mazeName = mazeFile.getSelectedItems().toString();
         mazeName = mazeName.substring(1,mazeName.length()-1);
@@ -54,20 +66,19 @@ public class LoadWindowController  implements Initializable, Observer {
         }
     }
 
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        File directory = new File(System.getProperty("user.dir")+"/Saved_Mazes");
 
-        File directory = new File("Saved_Mazes");
+        if (!directory.exists()){
+            directory.mkdirs();
+        }
+        String[] files;
         File[] contents = directory.listFiles();
         if (contents.length!=0) {
             for (File f : contents) {
-                listView.getItems().add(f.getPath().substring(12));
+                files = f.getPath().split("\\\\");
+                listView.getItems().add(files[files.length-1]);
             }
         }
         mainImageView.fitWidthProperty().bind(main_pane.widthProperty());

@@ -2,8 +2,6 @@ package View;
 
 
 import ViewModel.MyViewModel;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,16 +14,15 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import static View.OptionsWindowController.isMusic;
 
 
-public class MainMenuController implements Initializable, Observer {
+public class MainMenuController implements Initializable {
 
     public MyViewModel myViewModel;
 
@@ -37,24 +34,20 @@ public class MainMenuController implements Initializable, Observer {
     public ImageView mainImageView;
     public AnchorPane mainPane;
 
-    StringProperty updatePlayerRow = new SimpleStringProperty();
-    StringProperty updatePlayerCol = new SimpleStringProperty();
-
-    public static void music() {
+    public void music() {
         if (isMusic()){
             playing = true;
-            Media mediaMusic = new Media(Paths.get("./resources/music/HeroesGrassTheme.mp3").toUri().toString());
+            Media mediaMusic = new Media(getClass().getResource("/music/HeroesGrassTheme.mp3").toString());
             mediaPlayer = new MediaPlayer(mediaMusic);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
             mediaPlayer.setVolume(0.3);
         }
-
     }
 
-    public static void mouseAudio(){
+    public void mouseAudio(){
         if (isMusic()){
-            Media mouseClicked = new Media((Paths.get("./resources/music/Click.mp3").toUri().toString()));
+            Media mouseClicked = new Media(getClass().getResource("/music/Click.mp3").toString());
             MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
             mediaPlayer2.setCycleCount(1);
             mediaPlayer2.play();
@@ -62,18 +55,12 @@ public class MainMenuController implements Initializable, Observer {
         }
     }
 
-
-
-    @Override
-    public void update(Observable o, Object arg) {
-    }
-
-
     public void buttonStart(ActionEvent event) throws IOException {
         mouseAudio();
         Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MiddleScene.fxml"));
         Start_button.getScene().setRoot(root2);
     }
+
 
     public void buttonLoad(ActionEvent event) throws IOException {
         mouseAudio();
@@ -105,8 +92,9 @@ public class MainMenuController implements Initializable, Observer {
             if (!playing)
                 music();
         }
+        else
+            music();
         mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
         mainImageView.fitHeightProperty().bind(mainPane.heightProperty());
-
     }
 }

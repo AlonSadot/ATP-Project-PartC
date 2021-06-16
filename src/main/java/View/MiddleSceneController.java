@@ -12,15 +12,17 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class MiddleSceneController implements Initializable, Observer {
+import static View.OptionsWindowController.isMusic;
+
+public class MiddleSceneController implements Initializable {
     public Stage currStage;
 
     public Button Play_button;
@@ -33,16 +35,26 @@ public class MiddleSceneController implements Initializable, Observer {
     public RadioButton rb3;
 
     public void returnToMenu(ActionEvent event) throws IOException {
-        MainMenuController.mouseAudio();
+        mouseAudio();
         Scene root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenu.fxml"));
         currStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currStage.setScene(root);
         currStage.show();
     }
 
+    public void mouseAudio(){
+        if (isMusic()){
+            Media mouseClicked = new Media(getClass().getResource("/music/Click.mp3").toString());
+            MediaPlayer mediaPlayer2 = new MediaPlayer(mouseClicked);
+            mediaPlayer2.setCycleCount(1);
+            mediaPlayer2.play();
+            mediaPlayer2.setVolume(0.3);
+        }
+    }
+
 
     public void playButton(ActionEvent event) throws IOException{
-        MainMenuController.mouseAudio();
+        mouseAudio();
         if (rb1.isSelected())
             MazeDisplay.setDragonColor(1);
         else if (rb2.isSelected())
@@ -62,8 +74,6 @@ public class MiddleSceneController implements Initializable, Observer {
                 MyViewController.setMazeRows(Integer.parseInt(RowText.getText()));
                 MyViewController.setMazeCols(Integer.parseInt(ColText.getText()));
                 MyViewController.setMazeType(true);
-//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MyView.fxml"));
-//                fxmlLoader.load();
                 MainMenuController.mediaPlayer.stop();
                 MainMenuController.playing=false;
                 Parent root2 = FXMLLoader.load(getClass().getClassLoader().getResource("MyView.fxml"));
@@ -90,16 +100,10 @@ public class MiddleSceneController implements Initializable, Observer {
             return false;
         }
     }
-    @Override
-    public void update(Observable o, Object arg) {
 
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!MainMenuController.playing)
-                MainMenuController.music();
-
         mainImageView.fitWidthProperty().bind(mainPane.widthProperty());
         mainImageView.fitHeightProperty().bind(mainPane.heightProperty());
     }
