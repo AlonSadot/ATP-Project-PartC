@@ -1,2 +1,2 @@
 # ATP-Project-PartC
-Implementation of the GUI of the maze project using javaFX
+Implementation of the maze project GUI using javaFX
